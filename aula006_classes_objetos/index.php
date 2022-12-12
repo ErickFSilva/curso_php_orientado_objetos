@@ -1,15 +1,4 @@
-<?php
-
-    class Usuario{
-
-        // Métodos
-        public function cadastrar() {
-            return "Usuário cadastrado com sucesso";
-        }
-
-    }
-
-?>
+<?php require "Usuarios.php" ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">

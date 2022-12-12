@@ -1,32 +1,4 @@
-<?php
-
-use Usuario as GlobalUsuario;
-
-    class Usuario{
-
-        // Atributos
-        public string $nome;
-        public int $idade;
-        public String $email;
-
-        // Métodos
-        // Independente da tipagem, o retorno será um 'string'
-        public function cadastrar($nome, $idade, $email): string 
-        {
-            
-            $this->nome = $nome;
-            $this->idade = $idade;
-            $this->email = $email;
-
-            // return 10;
-
-            return "O usuario <strong>{$this->nome}</strong> com idade de <strong>{$this->idade}</strong> anos e o e-mail <strong>{$this->email}</strong>, cadastrado com sucesso!";
-
-        }
-
-    }
-
-?>
+<?php require "Usuarios.php" ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -44,7 +16,7 @@ use Usuario as GlobalUsuario;
 
     <?php
 
-        $usuario = new Usuario();
+        $usuario = new Usuarios();
 
         $msg = $usuario->cadastrar("Erick", 36, "erick.silva@php.br");
         echo $msg;
