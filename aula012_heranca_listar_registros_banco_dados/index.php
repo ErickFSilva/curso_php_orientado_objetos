@@ -1,6 +1,7 @@
 <!-- Incorpora as classes na página -->
 <?php
-
+    require "Conn.php";
+    require "ListUsers.php";
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +23,8 @@
     <div class="container">
         <?php
 
-        // 
+        $listUsers = new ListUsers();
+        $listUsers->list();
 
         ?>
     </div>

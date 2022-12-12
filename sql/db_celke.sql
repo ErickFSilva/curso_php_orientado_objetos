@@ -28,6 +28,18 @@ insert into usuarios values(null, 'Gabriely', 'gabriely@php.br');
 insert into usuarios values(null, 'Fulano', 'fulano@php.br');
 insert into usuarios values(null, 'Beltrano', 'beltrano@php.br');
 
+-- CRIANDO A TABELA: users
+create table if not exists users (
+	id int primary key auto_increment,
+    name varchar(220),
+    email varchar(220)
+);
+
+insert into users values(null, 'Erick', 'erick@php.br');
+insert into users values(null, 'Gabriel', 'gabriel@php.br');
+insert into users values(null, 'Raquezia', 'raquezia@php.br');
+insert into users values(null, 'Gabriely', 'gabriely@php.br');
+
 -- CRIANDO TABELA: extra_02_clientes
 create table if not exists extra_02_clientes (
 	id int primary key auto_increment,

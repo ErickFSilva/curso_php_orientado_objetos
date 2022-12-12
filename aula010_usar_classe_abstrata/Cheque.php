@@ -8,7 +8,7 @@ abstract class Cheque
     public string $tipo;
 
     // Construtor
-    public function __construct(float $valor, String $tipo) 
+    public function __construct(float $valor, string $tipo) 
     {
         $this->valor = $valor;
         $this->tipo = $tipo;
