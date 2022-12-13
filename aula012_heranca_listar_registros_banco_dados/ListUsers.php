@@ -6,8 +6,21 @@ class ListUsers extends Conn
     public object $conn;
 
     // Métodos
-    public function list()
+    public function listar(): array
     {
-        $this->conn = $this->connect();
+        // Preparando a conexão
+        $this->conn = $this->conectar();
+
+        // Query
+        $sqlSelect = "select id, name, email from users order by id desc limit 40";
+
+        // Preparando e executando a query no banco
+        $query = $this->conn->prepare($sqlSelect);
+        $query->execute();
+
+        // Lendo todos os dados retornados pela query
+        $retorno = $query->fetchAll();
+
+        return $retorno;
     }
 }

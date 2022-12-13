@@ -1,7 +1,7 @@
 <!-- Incorpora as classes na página -->
 <?php
-    require "Conn.php";
-    require "ListUsers.php";
+require "Conn.php";
+require "ListUsers.php";
 ?>
 
 <!DOCTYPE html>
@@ -21,12 +21,41 @@
 <body class="p-3">
 
     <div class="container">
-        <?php
 
-        $listUsers = new ListUsers();
-        $listUsers->list();
+        <div class="border rounded p-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">E-mail</th>
+                    </tr>
+                </thead>
 
-        ?>
+                <tbody class="table-group-divider">
+
+                    <?php
+
+                    $listUsers = new ListUsers();
+                    $result_users = $listUsers->listar();
+
+                    foreach ($result_users as $user) {
+                        // Extrai o conteúdo de um array
+                        extract($user);
+                    ?>
+
+                        <tr>
+                            <th scope="row"><?= $id ?></th>
+                            <td><?= $name ?></td>
+                            <td><?= $email ?></td>
+                        </tr>
+
+                    <?php } ?>
+
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
 </body>

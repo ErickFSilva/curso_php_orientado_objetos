@@ -12,7 +12,7 @@ abstract class Conn
     public object $connect;
 
     // Estabelecendo a conexão com o DB
-    public function connect()
+    public function conectar()
     {
         try 
         {

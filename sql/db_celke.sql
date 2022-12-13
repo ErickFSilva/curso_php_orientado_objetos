@@ -28,6 +28,7 @@ insert into usuarios values(null, 'Gabriely', 'gabriely@php.br');
 insert into usuarios values(null, 'Fulano', 'fulano@php.br');
 insert into usuarios values(null, 'Beltrano', 'beltrano@php.br');
 
+
 -- CRIANDO A TABELA: users
 create table if not exists users (
 	id int primary key auto_increment,
@@ -39,6 +40,7 @@ insert into users values(null, 'Erick', 'erick@php.br');
 insert into users values(null, 'Gabriel', 'gabriel@php.br');
 insert into users values(null, 'Raquezia', 'raquezia@php.br');
 insert into users values(null, 'Gabriely', 'gabriely@php.br');
+
 
 -- CRIANDO TABELA: extra_02_clientes
 create table if not exists extra_02_clientes (
@@ -56,6 +58,7 @@ insert into extra_02_clientes values(null, 'representante@fernandaefelipejoalher
 insert into extra_02_clientes values(null, 'gabriel@php.br', 'Rua Sebastião Paes de Melo');
 insert into extra_02_clientes values(null, '', 'Rua Sebastião Paes de Melo');
 
+
 -- CRIANDO TABELA: extra_02_clientes_pf
 create table if not exists extra_02_clientes_pf (
 	id int primary key auto_increment,
@@ -69,6 +72,7 @@ insert into extra_02_clientes_pf values(null, 'Erick Ferreira', '12345678901', 1
 insert into extra_02_clientes_pf values(null, 'Raquézia Ferreira', '23456789012', 2);
 insert into extra_02_clientes_pf values(null, 'Gabriel Ferreira', '', 7);
 insert into extra_02_clientes_pf values(null, 'Gabriely Ferreira', '45678901234', 8);
+
 
 -- CRIANDO TABELA: extra_02_clientes_pj
 create table if not exists extra_02_clientes_pj (
@@ -84,7 +88,10 @@ insert into extra_02_clientes_pj values(null, 'Joana e Tatiane Construções Ltd
 insert into extra_02_clientes_pj values(null, 'Joao e Lorena Ferragens ME', '06562209000125', 5);
 insert into extra_02_clientes_pj values(null, 'Fernanda e Felipe Joalheria ME', '55330211000184', 6);
 
+
 -- SELECTS
+select * from usuarios;
+select * from users;
 select * from extra_02_clientes;
 select * from extra_02_clientes_pf;
 select * from extra_02_clientes_pj;
