@@ -11,7 +11,7 @@ abstract class Conn
     public int $port = 3306; // Informar a porta é opcional em alguns servidores
     public object $connect;
 
-    // Estabelecendo a conexão com o DB
+    // Método que estabelece a conexão com o DB
     public function conectar()
     {
         try 
