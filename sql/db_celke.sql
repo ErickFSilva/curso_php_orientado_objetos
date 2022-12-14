@@ -37,6 +37,10 @@ create table if not exists users (
     email varchar(220)
 );
 
+ALTER TABLE `users` 
+ADD `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `email`, 
+ADD `modified` DATETIME NULL AFTER `created`;
+
 insert into users values(null, 'Erick', 'erick@php.br');
 insert into users values(null, 'Gabriel', 'gabriel@php.br');
 insert into users values(null, 'Raquezia', 'raquezia@php.br');
