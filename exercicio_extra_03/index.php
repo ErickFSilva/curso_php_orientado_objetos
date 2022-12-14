@@ -1,7 +1,6 @@
 <?php
 require "Conexao.php";
-require "ListaArtigosApre.php";
-require "ListaArtigosComp.php";
+require "BuscaArtigos.php";
 ?>
 
 <!DOCTYPE html>
@@ -25,53 +24,41 @@ require "ListaArtigosComp.php";
 
             <div class="col-lg-8 offset-lg-2">
                 <?php
-                $listaApre = new ListaArtigosApre();
-                $lista_artigos = $listaApre->listarArtigos();
+                $buscaArtigos = new BuscaArtigos();
+                $artigos = $buscaArtigos->listarArtigos();
 
-                foreach ($lista_artigos as $artigo) {
-                    $cont = 0;
-                    extract($artigo);
-                ?>
+                foreach ($artigos as $artigo) { ?>
 
                     <div class="card mb-4">
                         <div class="card-header">
-                            <?= $titulo ?>
+                            <?= $artigo['titulo'] ?>
                         </div>
+                        
                         <div class="card-body">
-                            <?= $texto ?>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="nav-link text-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <?= $artigo['texto'] ?>
+                            <!-- <a href="#" class="nav-link text-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <span style="font-size: 13px;">continue lendo...</span>
-                            </a>
+                            </a> -->
                         </div>
                     </div>
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
+                <?php } ?>
 
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                        TÍTULO
-                                    </h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    CONTEÚDO
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
+                <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                Conteúdo
                             </div>
-
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                    </div>
 
-                <?php
-                    $cont++;
-                }
-                ?>
+                    </div>
+                </div> -->
+
             </div>
 
         </div>

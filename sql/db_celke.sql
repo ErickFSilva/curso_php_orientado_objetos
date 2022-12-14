@@ -91,25 +91,15 @@ insert into extra_02_clientes_pj values(null, 'Fernanda e Felipe Joalheria ME', 
 
 
 -- CRIANDO TABELA: artigos
-create table if not exists artigos_apresentacao (
-	id int primary key auto_increment,
-    titulo varchar(128) not null,
-    texto tinytext not null
-);
-
-insert into artigos_apresentacao values(null, 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam suscipit, risus ac pretium tempor, metus tortor accumsan sapien, sed fringilla neque nunc a ex.');
-insert into artigos_apresentacao values(null, 'Fusce commodo aliquam tortor', 'Fusce commodo aliquam tortor non vulputate. Morbi dignissim, nisi sed dignissim feugiat, felis ex ultricies massa, quis mattis ipsum mi eget eros. Mauris sed ante mi.');
-insert into artigos_apresentacao values(null, 'Aliquam malesuada, dui sit amet ultrices', 'Aliquam malesuada, dui sit amet ultrices varius, magna sem vestibulum sem, in pellentesque diam diam sit amet turpis. Duis eleifend condimentum ipsum gravida volutpat.');
-
-create table if not exists artigos_completos (
+create table if not exists artigos (
 	id int primary key auto_increment,
     titulo varchar(128) not null,
     texto mediumtext not null
 );
 
-insert into artigos_completos values(null, 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam suscipit, risus ac pretium tempor, metus tortor accumsan sapien, sed fringilla neque nunc a ex. Vestibulum sed tincidunt augue. Suspendisse interdum diam id sapien egestas, eget ultrices augue maximus. Nulla lobortis non elit eu sagittis. Quisque mollis volutpat euismod. Vivamus ac sapien purus. Phasellus porta neque tempus ante lobortis, at tincidunt ligula blandit.');
-insert into artigos_completos values(null, 'Fusce commodo aliquam tortor', 'Fusce commodo aliquam tortor non vulputate. Morbi dignissim, nisi sed dignissim feugiat, felis ex ultricies massa, quis mattis ipsum mi eget eros. Mauris sed ante mi. Vestibulum eleifend felis leo, id ultrices odio egestas nec. Integer tellus sem, scelerisque congue ex ut, gravida vulputate urna. Curabitur in nulla tellus. Vivamus eget leo urna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut ac faucibus elit. Phasellus faucibus est in urna condimentum mollis. Donec iaculis nulla eu felis tincidunt tincidunt. Donec laoreet semper est sit amet ornare.');
-insert into artigos_completos values(null, 'Aliquam malesuada, dui sit amet ultrices', 'Aliquam malesuada, dui sit amet ultrices varius, magna sem vestibulum sem, in pellentesque diam diam sit amet turpis. Duis eleifend condimentum ipsum gravida volutpat. Cras elit lectus, eleifend in placerat sit amet, porttitor id augue. Sed fringilla, eros a dapibus commodo, augue metus semper augue, eu sagittis dui lacus nec velit. Nunc vitae dictum urna. Morbi vel justo quis sapien commodo rutrum. Nullam aliquam id leo a sagittis. Pellentesque sed sapien ipsum. Morbi imperdiet tortor sem, eu lobortis mi mattis et. Donec a lobortis nulla. Aenean ultrices, lectus vel sagittis convallis, mi risus ultrices diam, et interdum erat nisi viverra nisi. Suspendisse rhoncus erat augue, a pharetra lacus auctor sit amet. Quisque euismod, nisl eu finibus ultricies, lectus nisi imperdiet diam, in laoreet massa augue nec ipsum.');
+insert into artigos values(null, 'Artigo I', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam suscipit, risus ac pretium tempor, metus tortor accumsan sapien, sed fringilla neque nunc a ex. Vestibulum sed tincidunt augue. Suspendisse interdum diam id sapien egestas, eget ultrices augue maximus. Nulla lobortis non elit eu sagittis. Quisque mollis volutpat euismod. Vivamus ac sapien purus. Phasellus porta neque tempus ante lobortis, at tincidunt ligula blandit.');
+insert into artigos values(null, 'Artigo II', 'Fusce commodo aliquam tortor non vulputate. Morbi dignissim, nisi sed dignissim feugiat, felis ex ultricies massa, quis mattis ipsum mi eget eros. Mauris sed ante mi. Vestibulum eleifend felis leo, id ultrices odio egestas nec. Integer tellus sem, scelerisque congue ex ut, gravida vulputate urna. Curabitur in nulla tellus. Vivamus eget leo urna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut ac faucibus elit. Phasellus faucibus est in urna condimentum mollis. Donec iaculis nulla eu felis tincidunt tincidunt. Donec laoreet semper est sit amet ornare.');
+insert into artigos values(null, 'Artigo III', 'Aliquam malesuada, dui sit amet ultrices varius, magna sem vestibulum sem, in pellentesque diam diam sit amet turpis. Duis eleifend condimentum ipsum gravida volutpat. Cras elit lectus, eleifend in placerat sit amet, porttitor id augue. Sed fringilla, eros a dapibus commodo, augue metus semper augue, eu sagittis dui lacus nec velit. Nunc vitae dictum urna. Morbi vel justo quis sapien commodo rutrum. Nullam aliquam id leo a sagittis. Pellentesque sed sapien ipsum. Morbi imperdiet tortor sem, eu lobortis mi mattis et. Donec a lobortis nulla. Aenean ultrices, lectus vel sagittis convallis, mi risus ultrices diam, et interdum erat nisi viverra nisi. Suspendisse rhoncus erat augue, a pharetra lacus auctor sit amet. Quisque euismod, nisl eu finibus ultricies, lectus nisi imperdiet diam, in laoreet massa augue nec ipsum.');
 
 
 -- SELECTS
@@ -118,8 +108,7 @@ select * from users;
 select * from extra_02_clientes;
 select * from extra_02_clientes_pf;
 select * from extra_02_clientes_pj;
-select * from artigos_apresentacao;
-select * from artigos_completos;
+select * from artigos;
 
 -- 
 select c.id, cfis.nome, c.email, cfis.cpf, c.endereco, cfis.id_cliente from extra_02_clientes c

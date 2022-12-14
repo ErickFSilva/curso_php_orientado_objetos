@@ -1,6 +1,6 @@
 <?php
 
-class ListaArtigosApre extends Conexao
+class BuscaArtigos extends Conexao
 {
     // Atributos
     public object $connect;
@@ -12,14 +12,14 @@ class ListaArtigosApre extends Conexao
         $this->connect = $this->conectar();
 
         // Query
-        $artigos_apresentacao = "select id, titulo, texto from artigos_apresentacao order by id desc";
+        $artigos = "select id, titulo, texto from artigos order by id desc";
 
         // Preparando e executando as querys no banco
-        $query_apre = $this->connect->prepare($artigos_apresentacao);
-        $query_apre->execute();
+        $query = $this->connect->prepare($artigos);
+        $query->execute();
 
         // Lendo todos os dados retornados pela query
-        $retorno = $query_apre->fetchAll();
+        $retorno = $query->fetchAll();
 
         return $retorno;
     }
