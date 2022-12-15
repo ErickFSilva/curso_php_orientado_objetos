@@ -23,7 +23,7 @@ require "User.php";
     <div class="container">
         <div class="row">
 
-            <nav class="navbar navbar-expand navbar-dark bg-secondary mb-4">
+            <nav class="navbar navbar-expand navbar-dark bg-dark mb-4">
                 <ul class="navbar-nav">
                     <li class="navbar-item">
                         <a class="nav-link active" aria-current="page" href="index.php">Listar</a>
