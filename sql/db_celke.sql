@@ -10,9 +10,9 @@ show tables;
 drop table extra_02_clientes;
 drop table extra_02_clientes_pf;
 drop table extra_02_clientes_pj;
-drop table artigosapresentacao;
+drop table artigos;
 
-delete from usuarios where id = 7;
+delete from users where id = 7;
 
 
 -- CRIANDO TABELA: usuarios

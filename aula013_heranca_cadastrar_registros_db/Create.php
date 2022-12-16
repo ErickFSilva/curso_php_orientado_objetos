@@ -1,5 +1,8 @@
 <!-- Incorpora as classes na página -->
 <?php
+session_start();
+ob_start();
+
 require "Conn.php";
 require "User.php";
 ?>
@@ -48,7 +51,18 @@ require "User.php";
                 
                 $createUser = new User();
                 $createUser->formData = $formData;
-                $createUser->create();
+                $valorCad = $createUser->create();
+
+                if($valorCad)
+                {
+                    $_SESSION['msg'] = "<p>Usuário cadastrado com sucesso!</p>";
+                    header("Location: index.php");
+                }
+                else 
+                {
+                    $_SESSION['msg'] = "<p>Usuário cadastrado com sucesso!</p>";
+                    header("Location: index.php");
+                }
             }
 
             ?>

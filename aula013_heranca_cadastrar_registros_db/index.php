@@ -1,5 +1,7 @@
 <!-- Incorpora as classes na página -->
 <?php
+session_start();
+
 require "Conn.php";
 require "User.php";
 ?>
@@ -37,6 +39,13 @@ require "User.php";
             <h1 class="mb-4">Listar Usuário</h1>
 
             <?php
+
+            if(isset($_SESSION['msg']))
+            {
+                echo $_SESSION['msg'];
+                // Destroi o conteúdo da variável global após a sua impressão
+                unset($_SESSION['msg']);
+            }
 
             $listUser = new User();
             $result_users = $listUser->list();
