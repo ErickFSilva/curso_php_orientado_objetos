@@ -14,69 +14,11 @@
 
 <body>
 
-    <!-- 
-        create table if not exists cad_despesas (
-            id int primary key auto_increment,
-            tipo varchar(32) not null,
-            descricao varchar(256) not null,
-            valor float(5,2) not null,
-            _data date not null
-        ); 
-    -->
-
     <div class="container-fluid">
         <div class="row">
 
             <div class="col-xl-10 offset-xl-1">
-                <form method="POST" action="">
-
-                    <div class="row border">
-
-                        <div class="col-md-8 col-lg-2 border">
-                            <label class="w-100">
-                                <div class="py-2">
-                                    <span class="text-bg-primary px-2 py-1 rounded">T</span>ipo:
-                                </div>
-                                <select class="form-select" name="tipo" required>
-                                    <option selected>-- Opcões --</option>
-                                    <option value=""></option>
-                                    <option value=""></option>
-                                    <option value=""></option>
-                                    <option value=""></option>
-                                </select>
-                            </label>
-                        </div>
-
-                        <div class="col-md-8 col-lg-6 border">
-                            <label class="w-100">
-                                <div class="py-2">
-                                    <span class="text-bg-info px-2 py-1 rounded">D</span>escrição:
-                                </div>
-                                <input type="text" class="form-control" name="descricao" required>
-                            </label>
-                        </div>
-
-                        <div class="col-md-8 col-lg-2 border">
-                            <label class="w-100">
-                                <div class="py-2">
-                                    <span class="text-bg-warning px-2 py-1 rounded">V</span>alor:
-                                </div>
-                                <input type="number" class="form-control" name="valor" required>
-                            </label>
-                        </div>
-
-                        <div class="col-md-8 col-lg-2 border">
-                            <label class="w-100">
-                                <div class="py-2">
-                                    <span class="text-bg-danger px-2 py-1 rounded">D</span>ata:
-                                </div>
-                                <input type="date" class="form-control" name="_data" required>
-                            </label>
-                        </div>
-
-                    </div>
-
-                </form>
+                <!--  -->
             </div>
 
         </div>

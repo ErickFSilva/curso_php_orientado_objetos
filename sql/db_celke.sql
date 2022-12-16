@@ -112,7 +112,7 @@ create table if not exists cad_despesas (
 	id int primary key auto_increment,
     tipo varchar(32) not null,
     descricao varchar(256) not null,
-    valor float(5,2) not null,
+    valor float(6,2) not null,
     _data date not null
 );
 
