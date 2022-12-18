@@ -60,7 +60,7 @@ require "User.php";
                 }
                 else 
                 {
-                    $_SESSION['msg'] = "<p>Usuário cadastrado com sucesso!</p>";
+                    $_SESSION['msg'] = "<p>Erro no cadastro do usuário!</p>";
                     header("Location: index.php");
                 }
             }

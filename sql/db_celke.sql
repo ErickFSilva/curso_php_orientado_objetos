@@ -116,6 +116,8 @@ create table if not exists cad_despesas (
     _data date not null
 );
 
+insert into cad_despesas values(null, 'dia_a_dia', 'Água', 2.50, now());
+
 
 -- SELECTS
 select * from usuarios;
@@ -124,12 +126,4 @@ select * from extra_02_clientes;
 select * from extra_02_clientes_pf;
 select * from extra_02_clientes_pj;
 select * from artigos;
-
--- 
-select c.id, cfis.nome, c.email, cfis.cpf, c.endereco, cfis.id_cliente from extra_02_clientes c
-inner join extra_02_clientes_pf cfis on c.id = cfis.id_cliente
-order by c.id;
-
-select c.id, cjus.nome_fantasia, c.email, cjus.cnpf, c.endereco, cjus.id_cliente from extra_02_clientes c
-inner join extra_02_clientes_pj cjus on c.id = cjus.id_cliente
-order by c.id;
+select * from cad_despesas order by id desc;
