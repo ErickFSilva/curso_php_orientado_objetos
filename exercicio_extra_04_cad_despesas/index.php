@@ -1,5 +1,8 @@
 <?php
 
+session_start();
+ob_start();
+
 require_once "Conexao.php";
 require_once "Despesas.php";
 
@@ -41,6 +44,18 @@ require_once "Despesas.php";
                 </h1>
             </div>
 
+            <?php
+
+            if (isset($_SESSION["msg"])) {
+                // Imprime a variável global
+                echo $_SESSION["msg"];
+
+                // Destroi o conteúdo da variável global após a sua impressão
+                unset($_SESSION["msg"]);
+            }
+
+            ?>
+
             <div class="col-xl-10 offset-xl-1">
 
                 <table class="table">
@@ -63,7 +78,7 @@ require_once "Despesas.php";
                         foreach ($listaDespesas as $despesa) {
                             extract($despesa);
                         ?>
-                        
+
                             <tr>
                                 <td><?= $id ?></td>
                                 <td><?= $tipo ?></td>

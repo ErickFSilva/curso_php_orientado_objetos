@@ -20,6 +20,15 @@ class Despesas extends Conexao
         return $consulta_desp->fetchAll(PDO::FETCH_ASSOC);;
     }
 
+    // public function listarDespesas2()
+    // {
+    //     $this->conexao = $this->connectDb();
+
+    //     $q = "select id, tipo, descricao, valor, _data from cad_despesas order by id desc";
+
+    //     return $this->conexao->query($q)->fetchAll();
+    // }
+
     // - cadastrarDespesas()
     public function cadastrarDespesas(): bool
     {

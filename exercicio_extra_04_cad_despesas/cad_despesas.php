@@ -62,29 +62,16 @@ require_once "Despesas.php";
 
                     if($retorno)
                     {
-                        $_SESSION["msg"] = "<p>Despesa cadastrada com sucesso!</p>";
-                        // header("Location: index.php");
+                        $_SESSION["msg"] = '<p class="text-success">Despesa cadastrada com sucesso!</p>';
+                        header("Location: index.php");
                         // echo "<p>Despesa cadastrada com sucesso!</p>";
                     }
                     else
                     {
-                        $_SESSION["msg"] = "<p>Erro no cadastro da despesa!</p>";
-                        // header("Location: index.php");
+                        $_SESSION["msg"] = '<p class="text-danger">Erro no cadastro da despesa!</p>';
+                        header("Location: index.php");
                         // echo "<p>Erro no cadastro da despesa!</p>";
                     }
-                }
-
-                ?>
-
-                <?php
-
-                if(isset($_SESSION["msg"]))
-                {
-                    // Imprime a variável global
-                    echo $_SESSION["msg"];
-
-                    // Destroi o conteúdo da variável global após a sua impressão
-                    unset($_SESSION["msg"]);
                 }
 
                 ?>
@@ -93,7 +80,7 @@ require_once "Despesas.php";
 
                     <div class="row justify-content-md-center">
 
-                        <div class="col-md-8 col-lg-2">
+                        <div class="col-md-8 col-lg-3">
                             <label class="w-100">
                                 <div class="fs-4 py-2">
                                     <span class="text-bg-primary px-2 py-0 rounded">T</span>ipo
@@ -111,7 +98,7 @@ require_once "Despesas.php";
                             </label>
                         </div>
 
-                        <div class="col-md-8 col-lg-6">
+                        <div class="col-md-8 col-lg-5">
                             <label class="w-100">
                                 <div class="fs-4 py-2">
                                     <span class="text-bg-info px-2 py-0 rounded">D</span>escrição:
