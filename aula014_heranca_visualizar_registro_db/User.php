@@ -5,6 +5,7 @@ class User extends Conn
     // Atributos
     public object $conn;
     public array $formData;
+    public int $id;
 
     // Métodos
     public function list(): array
@@ -23,7 +24,6 @@ class User extends Conn
 
     public function create(): bool
     {
-        // var_dump($this->formData);
 
         $this->conn = $this->connectDb();
 
@@ -43,6 +43,22 @@ class User extends Conn
         {
             return false;
         }
+    }
+
+    public function view(): array
+    {
+        $this->conn  =$this->connectDb();
+
+        $query_user = "SELECT id, name, email, created, modified FROM users WHERE id = :id LIMIT 1";
+
+        $result_user = $this->conn->prepare($query_user);
+        $result_user->bindParam(':id', $this->id);
+        $result_user->execute();
+
+        // Retorna apenas um registro
+        $value = $result_user->fetch();
+
+        return $value;
     }
 
 }

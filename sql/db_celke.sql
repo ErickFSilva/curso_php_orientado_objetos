@@ -7,6 +7,8 @@ use db_celke;
 show databases;
 show tables;
 
+desc users;
+
 drop table extra_02_clientes;
 drop table extra_02_clientes_pf;
 drop table extra_02_clientes_pj;
@@ -42,10 +44,10 @@ ALTER TABLE `users`
 ADD `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `email`, 
 ADD `modified` DATETIME NULL AFTER `created`;
 
-insert into users values(null, 'Erick', 'erick@php.br');
-insert into users values(null, 'Gabriel', 'gabriel@php.br');
-insert into users values(null, 'Raquezia', 'raquezia@php.br');
-insert into users values(null, 'Gabriely', 'gabriely@php.br');
+insert into users values(null, 'Erick', 'erick@php.br', now(), null);
+insert into users values(null, 'Gabriel', 'gabriel@php.br', now(), null);
+insert into users values(null, 'Raquezia', 'raquezia@php.br', now(), null);
+insert into users values(null, 'Gabriely', 'gabriely@php.br', now(), null);
 
 
 -- CRIANDO TABELA: extra_02_clientes

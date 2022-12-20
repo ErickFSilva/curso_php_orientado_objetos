@@ -40,19 +40,44 @@ ob_start();
 
             <?php
 
-            if (isset($_SESSION['msg'])) {
-                echo $_SESSION['msg'];
-                // Destroi o conteúdo da variável global após a sua impressão
-                unset($_SESSION['msg']);
-            }
+            // if (isset($_SESSION['msg'])) {
+            //     echo $_SESSION['msg'];
+            //     // Destroi o conteúdo da variável global após a sua impressão
+            //     unset($_SESSION['msg']);
+            // }
 
             // Receber o ID do usuário via 'GET'
             $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
             
             if(!empty($id))
             {
+                // Incorpora as classes no arquivo
                 require "Conn.php";
                 require "User.php";
+
+                // Instancia a classe e cria o objeto
+                $viewUser = new User();
+                // Envia o 'id' para o atributo 'id' da classe 'User'
+                $viewUser->id = $id;
+
+                // Instanciando o método visualizar
+                $valueUser = $viewUser->view();
+
+                extract($valueUser);
+
+                echo "ID do usuário: $id <br>";
+                echo "Nome do usuário: $name <br>";
+                echo "E-mail do usuário: $email <br>";
+                echo "Cadastrado: " . date('d/m/y H:i:s', strtotime($created)) . "<br>";
+                echo "Editado: ";
+
+                // Verifica se o 'id' possui valor
+                if(!empty($modified))
+                {
+                    echo date('d/m/Y H:i:s', strtotime($modified));
+                }
+                
+                echo "<br>";
             }
             else
             {
