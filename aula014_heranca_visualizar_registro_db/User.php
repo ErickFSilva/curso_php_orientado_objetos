@@ -47,7 +47,7 @@ class User extends Conn
 
     public function view(): array
     {
-        $this->conn  =$this->connectDb();
+        $this->conn = $this->connectDb();
 
         $query_user = "SELECT id, name, email, created, modified FROM users WHERE id = :id LIMIT 1";
 

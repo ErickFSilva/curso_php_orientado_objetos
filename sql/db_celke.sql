@@ -127,5 +127,5 @@ select * from users;
 select * from extra_02_clientes;
 select * from extra_02_clientes_pf;
 select * from extra_02_clientes_pj;
-select * from artigos;
+select id, titulo, texto from artigos order by id desc;
 select * from cad_despesas order by id desc;

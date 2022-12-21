@@ -46,7 +46,7 @@ ob_start();
             //     unset($_SESSION['msg']);
             // }
 
-            // Receber o ID do usuário via 'GET'
+            // Recebe o ID do usuário via 'GET'
             $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
             
             if(!empty($id))
@@ -57,7 +57,7 @@ ob_start();
 
                 // Instancia a classe e cria o objeto
                 $viewUser = new User();
-                // Envia o 'id' para o atributo 'id' da classe 'User'
+                // Envia o 'id' recuperado para o atributo 'id' da classe 'User'
                 $viewUser->id = $id;
 
                 // Instanciando o método visualizar
