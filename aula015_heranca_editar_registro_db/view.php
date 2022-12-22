@@ -1,9 +1,9 @@
 <!-- Incorpora as classes na página -->
 <?php
-session_start();
 
-require "Conn.php";
-require "User.php";
+session_start();
+ob_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ require "User.php";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - PHP OO</title>
+    <title>Visualizar - PHP OO</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -36,33 +36,55 @@ require "User.php";
                 </ul>
             </nav>
 
-            <h1 class="mb-4">Listar Usuário</h1>
+            <h1 class="mb-4">Detalhes do Usuário</h1>
 
             <?php
 
-            if(isset($_SESSION['msg'])) {
-
+            if (isset($_SESSION['msg'])) {
                 echo $_SESSION['msg'];
-
                 // Destroi o conteúdo da variável global após a sua impressão
                 unset($_SESSION['msg']);
-
             }
 
-            $listUser = new User();
-            $result_users = $listUser->list();
+            // Recebe o ID do usuário via 'GET'
+            $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+            
+            // Verificar se o 'id' possui valor
+            if(!empty($id))
+            {
+                // Incorpora as classes no arquivo
+                require "Conn.php";
+                require "User.php";
 
-            foreach($result_users as $row_user) {
-
-                extract($row_user);
-
-                echo "ID: $id <br>";
-                echo "Nome: $name <br>";
-                echo "E-mail: $email <br>";
-                echo "<a href='view.php?id=$id' class='nav-link text-primary'>Visualizar</a><br>";
-                echo "<a href='edit.php?id=$id' class='nav-link text-primary'>Editar</a><br>";
-                echo "<hr>";
+                // Instancia a classe e cria o objeto
+                $viewUser = new User();
                 
+                // Envia o 'id' recuperado para o atributo 'id' da classe 'User'
+                $viewUser->id = $id;
+
+                // Instanciando o método visualizar
+                $valueUser = $viewUser->view();
+
+                extract($valueUser);
+
+                echo "ID do usuário: $id <br>";
+                echo "Nome do usuário: $name <br>";
+                echo "E-mail do usuário: $email <br>";
+                echo "Cadastrado: " . date('d/m/y H:i:s', strtotime($created)) . "<br>";
+                echo "Editado: ";
+
+                // Verifica se o 'id' possui valor
+                if(!empty($modified))
+                {
+                    echo date('d/m/Y H:i:s', strtotime($modified));
+                }
+                
+                echo "<br>";
+            }
+            else
+            {
+                $_SESSION['msg'] = "<p style='color: #f00;'>Erro: Usuário não encontrado!</p>";
+                header("Location: index.php");
             }
 
             ?>
