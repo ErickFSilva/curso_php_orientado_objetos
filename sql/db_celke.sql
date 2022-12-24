@@ -121,11 +121,44 @@ create table if not exists cad_despesas (
 insert into cad_despesas values(null, 'dia_a_dia', 'Água', 2.50, now());
 
 
+-- CRIANDO TABELA: boletim_alunos e notas_alunos
+create table if not exists boletim_alunos (
+	id int primary key auto_increment,
+    cod varchar(3) not null,
+    aluno varchar(128) not null,
+    situacao bool
+);
+
+insert into boletim_alunos value (null, '101', 'Erick Ferreira', true);
+
+create table if not exists notas_alunos (
+	id int primary key auto_increment,
+    nota1 decimal(3,1),
+    nota2 decimal(3,1),
+    media decimal(3,1),
+    id_boletim int not null,
+    foreign key(id_boletim) references boletim_alunos (id)
+);
+
+insert into notas_alunos value (null, 10.0, 8.0, 9.0, 1);
+
+
 -- SELECTS
 select * from usuarios;
+
 select * from users;
+
 select * from extra_02_clientes;
+
 select * from extra_02_clientes_pf;
+
 select * from extra_02_clientes_pj;
+
 select id, titulo, texto from artigos order by id desc;
+
 select * from cad_despesas order by id desc;
+
+select ba.id, ba.cod, ba.aluno, na.nota1, na.nota2, na.media, ba.situacao
+from boletim_alunos ba
+inner join notas_alunos na on (ba.id = na.id_boletim)
+where ba.id = 1;
