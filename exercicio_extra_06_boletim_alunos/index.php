@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require "controle/Conexao.php";
 require "controle/Controle.php";
 
@@ -21,14 +23,15 @@ require "controle/Controle.php";
 
 <body class="bg-light">
 
-    <div class="mb-3" style="background-color: teal;">
-        <div class="container">
-            <h1 class="py-3 h3 text-light">Boletim Escolar</h1>
-        </div>
-    </div>
+    <?php 
+        $pagina = 'home';
+        require "navegacao.php"; 
+    ?>
 
-    <div class="container">
+    <div class="container mt-4">
         <div class="row">
+
+            <h1 class="mb-4 h3 text-secondary">Home</h1>
 
             <table class="table">
                 <thead>
@@ -43,6 +46,14 @@ require "controle/Controle.php";
                 <tbody class="table-group-divider">
 
                     <?php
+
+                    if (isset($_SESSION['msg'])) {
+
+                        echo $_SESSION['msg'];
+
+                        // Destroi o conteúdo da variável global após a sua impressão
+                        unset($_SESSION['msg']);
+                    }
 
                     $controle = new Controle();
                     $lista_alunos = $controle->listar();
@@ -67,7 +78,8 @@ require "controle/Controle.php";
                                 <a class="nav-link d-inline-block me-2 text-success" href="visualizar.php?id=<?= $id ?>">
                                     Visualizar
                                 </a>
-                                <a class="nav-link d-inline-block me-2" style="color: steelblue" href="#">
+                                
+                                <a class="nav-link d-inline-block me-2 text-primary" href="#">
                                     Editar
                                 </a>
                                 <a class="nav-link d-inline-block me-2 text-danger" href="#">

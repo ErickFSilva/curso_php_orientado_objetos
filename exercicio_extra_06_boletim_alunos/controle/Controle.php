@@ -12,6 +12,7 @@ class Controle extends Conexao {
     public int $id;
 
     // Métodos
+    // Lista todos os alunos cadastrados
     public function listar(): array {
 
         $this->connect = $this->connectDb();
@@ -25,12 +26,13 @@ class Controle extends Conexao {
 
     }
 
+    // Visualiza o boletim do aluno escolhido no cadastro
     public function visualizar(): array {
 
         $this->connect = $this->connectDb();
 
         $sqlSelect = '
-            select ba.id, ba.cod, ba.aluno, na.nota1, na.nota2, na.media, ba.situacao
+            select ba.id, ba.cod, ba.aluno, na.materia, na.nota1, na.nota2, na.media, ba.situacao
             from boletim_alunos ba
             inner join notas_alunos na on (ba.id = na.id_boletim)
             where ba.id = :id limit 1
@@ -41,6 +43,13 @@ class Controle extends Conexao {
         $query->execute();
 
         return $query->fetch();
+
+    }
+
+    // Cadastra novos alunos
+    public function cadastra() {
+
+        var_dump($this->formData);
 
     }
 

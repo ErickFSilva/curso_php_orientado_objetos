@@ -1,4 +1,3 @@
-<!-- Incorpora as classes na página -->
 <?php
 
 session_start();
@@ -41,17 +40,20 @@ ob_start();
             <?php
 
             if (isset($_SESSION['msg'])) {
+				
                 echo $_SESSION['msg'];
+				
                 // Destroi o conteúdo da variável global após a sua impressão
                 unset($_SESSION['msg']);
+				
             }
 
             // Recebe o ID do usuário via 'GET'
             $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
             
             // Verificar se o 'id' possui valor
-            if(!empty($id))
-            {
+            if(!empty($id)) {
+				
                 // Incorpora as classes no arquivo
                 require "Conn.php";
                 require "User.php";
@@ -62,7 +64,7 @@ ob_start();
                 // Envia o 'id' recuperado para o atributo 'id' da classe 'User'
                 $viewUser->id = $id;
 
-                // Instanciando o método visualizar
+                // Instancia o método 'visualizar()', transformando uma variável em array
                 $valueUser = $viewUser->view();
 
                 extract($valueUser);
@@ -74,17 +76,20 @@ ob_start();
                 echo "Editado: ";
 
                 // Verifica se o 'id' possui valor
-                if(!empty($modified))
-                {
+                if(!empty($modified)) {
+					
                     echo date('d/m/Y H:i:s', strtotime($modified));
+					
                 }
                 
                 echo "<br>";
+				
             }
-            else
-            {
+            else {
+				
                 $_SESSION['msg'] = "<p style='color: #f00;'>Erro: Usuário não encontrado!</p>";
                 header("Location: index.php");
+				
             }
 
             ?>

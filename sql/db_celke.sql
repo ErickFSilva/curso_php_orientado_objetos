@@ -130,9 +130,11 @@ create table if not exists boletim_alunos (
 );
 
 insert into boletim_alunos value (null, '101', 'Erick Ferreira', true);
+insert into boletim_alunos value (null, '102', 'Raquezia Ferreira', true);
 
 create table if not exists notas_alunos (
 	id int primary key auto_increment,
+    materia varchar(16) not null,
     nota1 decimal(3,1),
     nota2 decimal(3,1),
     media decimal(3,1),
@@ -140,7 +142,8 @@ create table if not exists notas_alunos (
     foreign key(id_boletim) references boletim_alunos (id)
 );
 
-insert into notas_alunos value (null, 10.0, 8.0, 9.0, 1);
+insert into notas_alunos value (null, 'Programação', 10.0, 8.0, 9.0, 1);
+insert into notas_alunos value (null, 'Gerais', 9.0, 10.0, 9.5, 2);
 
 
 -- SELECTS
@@ -158,7 +161,7 @@ select id, titulo, texto from artigos order by id desc;
 
 select * from cad_despesas order by id desc;
 
-select ba.id, ba.cod, ba.aluno, na.nota1, na.nota2, na.media, ba.situacao
+select ba.id, ba.cod, ba.aluno, na.materia, na.nota1, na.nota2, na.media, ba.situacao
 from boletim_alunos ba
 inner join notas_alunos na on (ba.id = na.id_boletim)
 where ba.id = 1;

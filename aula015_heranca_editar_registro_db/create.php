@@ -45,8 +45,8 @@ require "User.php";
             $formData = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
             // Só executa a ação se o botão 'Cadastrar' for clicado
-            if(!empty($formData['SendAddUser']))
-            {
+            if(!empty($formData['SendAddUser'])) {
+				
                 // var_dump($formData);
                 
                 $createUser = new User();
@@ -63,6 +63,7 @@ require "User.php";
                     $_SESSION['msg'] = "<p>Erro no cadastro do usuário!</p>";
                     header("Location: index.php");
                 }
+				
             }
 
             ?>
