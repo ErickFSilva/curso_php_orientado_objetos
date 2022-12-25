@@ -1,5 +1,8 @@
 <?php
 
+session_start();
+ob_start();
+
 require "controle/Conexao.php";
 require "controle/Controle.php";
 
@@ -39,21 +42,21 @@ require "controle/Controle.php";
 
                 <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 mb-3">
                     <fieldset class="mb-3">
-                        <legend class="text-secondary">#Aluno</legend>
+                        <legend class="text-secondary"># Aluno</legend>
 
                         <div class="mb-3">
                             <label for="codigo">Código:</label>
-                            <input type="number" min="101" class="form-control w-25" name="codigo" id="codigo" required>
+                            <input type="number" value="<?= $ultimo_codigo ?>" class="form-control w-25" name="codigo" id="codigo" disabled>
                         </div>
 
                         <div class="mb-3">
-                            <label for="nome">Nome:</label>
-                            <input type="text" class="form-control" name="nome" id="nome" required>
+                            <label for="aluno">Aluno:</label>
+                            <input type="text" class="form-control" name="aluno" id="aluno" required>
                         </div>
                     </fieldset>
 
                     <fieldset class="mb-3">
-                        <legend class="text-secondary">#Notas</legend>
+                        <legend class="text-secondary"># Matéria e Notas</legend>
 
                         <div class="mb-3">
                             <label for="materia">Matéria:</label>
@@ -76,15 +79,16 @@ require "controle/Controle.php";
                                 <option value="seguranca">Segurança</option>
                             </select>
                         </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="nota1">Nota 1</span>
-                            <input type="number" name="nota1" value="0" min="0" max="10" class="form-control me-5" aria-describedat="nota1">
+                        <div class="mb-3">
+                            <div class="d-inline-block me-4">
+                                <label for="nota1">Nota 1:</label>
+                                <input type="number" id="nota1" name="nota1" value="0" min="0" max="10" class="form-control" style="width: 70px;">
+                            </div>
 
-                            <span class="input-group-text" id="nota2">Nota 2</span>
-                            <input type="number" name="nota2" value="0" min="0" max="10" class="form-control me-5" aria-describedat="nota2">
-
-                            <span class="input-group-text" id="nota1">Média</span>
-                            <input type="text" name="media" value="0" class="form-control" aria-describedat="nota1" disabled>
+                            <div class="d-inline-block">
+                                <label for="nota2">Nota 2:</label>
+                                <input type="number" id="nota2" name="nota2" value="0" min="0" max="10" class="form-control" style="width: 70px;">
+                            </div>
                         </div>
                     </fieldset>
 

@@ -36,7 +36,7 @@ class User extends Conn
         $add_user->execute();
 
         // Verifica se foi cadastrado com sucesso!
-        if ($add_user->rowCount()) {
+        if($add_user->rowCount()) {
 
             return true;
 

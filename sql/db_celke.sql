@@ -165,3 +165,5 @@ select ba.id, ba.cod, ba.aluno, na.materia, na.nota1, na.nota2, na.media, ba.sit
 from boletim_alunos ba
 inner join notas_alunos na on (ba.id = na.id_boletim)
 where ba.id = 1;
+
+select cod from boletim_alunos;
