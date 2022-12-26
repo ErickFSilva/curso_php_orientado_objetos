@@ -16,6 +16,7 @@ drop table artigos;
 drop table cad_despesas;
 
 delete from users where id = 7;
+delete from boletim_alunos where codigo = '103';
 
 
 -- CRIANDO TABELA: usuarios
@@ -124,13 +125,13 @@ insert into cad_despesas values(null, 'dia_a_dia', 'Água', 2.50, now());
 -- CRIANDO TABELA: boletim_alunos e notas_alunos
 create table if not exists boletim_alunos (
 	id int primary key auto_increment,
-    cod varchar(3) not null,
+    codigo varchar(4) not null,
     aluno varchar(128) not null,
-    situacao bool
+    situacao int
 );
 
-insert into boletim_alunos value (null, '101', 'Erick Ferreira', true);
-insert into boletim_alunos value (null, '102', 'Raquezia Ferreira', true);
+insert into boletim_alunos value (null, '101', 'Erick Ferreira', 1);
+insert into boletim_alunos value (null, '102', 'Raquezia Ferreira', 1);
 
 create table if not exists notas_alunos (
 	id int primary key auto_increment,
@@ -161,9 +162,9 @@ select id, titulo, texto from artigos order by id desc;
 
 select * from cad_despesas order by id desc;
 
-select ba.id, ba.cod, ba.aluno, na.materia, na.nota1, na.nota2, na.media, ba.situacao
+select ba.id, ba.codigo, ba.aluno, na.materia, na.nota1, na.nota2, na.media, ba.situacao
 from boletim_alunos ba
 inner join notas_alunos na on (ba.id = na.id_boletim)
 where ba.id = 1;
 
-select cod from boletim_alunos;
+select codigo from boletim_alunos;

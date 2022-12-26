@@ -6,7 +6,8 @@ class Controle extends Conexao {
     private object $connect;
     public array $formData;
     public int $id;
-    public bool $situacao = false;
+    public string $codigo;
+    public int $situacao;
 
     // Métodos
     // Lista todos os alunos cadastrados
@@ -14,7 +15,7 @@ class Controle extends Conexao {
 
         $this->connect = $this->connectDb();
 
-        $sqlSelect = 'select id, cod, aluno, situacao from boletim_alunos';
+        $sqlSelect = 'select id, codigo, aluno, situacao from boletim_alunos';
 
         $query = $this->connect->prepare($sqlSelect);
         $query->execute();
@@ -29,7 +30,7 @@ class Controle extends Conexao {
         $this->connect = $this->connectDb();
 
         $sqlSelect = '
-            select ba.id, ba.cod, ba.aluno, na.materia, na.nota1, na.nota2, na.media, ba.situacao
+            select ba.id, ba.codigo, ba.aluno, na.materia, na.nota1, na.nota2, na.media, ba.situacao
             from boletim_alunos ba
             inner join notas_alunos na on (ba.id = na.id_boletim)
             where ba.id = :id limit 1
@@ -44,41 +45,53 @@ class Controle extends Conexao {
     }
 
     // Cadastra novos alunos
-    public function cadastrar(): bool {
+    public function cadastrar() {
 
-        // select ba.id, ba.cod, ba.aluno, na.materia, na.nota1, na.nota2, na.media, ba.situacao
-        // from boletim_alunos ba
-        // inner join notas_alunos na on (ba.id = na.id_boletim)
-        // where ba.id = 1;
+        // echo '<pre>';
+        // echo $this->ultimoCodAluno() . '<br>';
+        // var_dump($this->formData);
+        // echo '</pre>';
+
+        // Prepara o código do aluno
+        $codigo_aluno = intval($this->ultimoCodAluno()) + 1;
+        $this->codigo = strval($codigo_aluno);
 
         // Calculando média e definindo 'situação' do aluno
-        $nota1 = $this->formData['nota1'];
-        $nota2 = $this->formData['nota2'];
-        $media = ((int) $nota1) + (int) ($nota2) / 2;
+        $nota1 = intval($this->formData['nota1']);
+        $nota2 = intval($this->formData['nota2']);
+        $media = ($nota1 + $nota2) / 2;
         
         if($media >= 6) {
-            $this->situacao = true;
+
+            $this->situacao = 1;
+
+        }
+        else {
+
+            $this->situacao = 0;
+
         }
 
         $this->connect = $this->connectDb();
 
-        $sql_insert = "insert into boletim_alunos value (null, :codigo, :aluno, :situacao)";
-        $sql_insert += "insert into notas_alunos value (null, :materia, :nota1, :nota2, :media, :id_aluno)"; 
+        $sql_insert_1 = "insert into boletim_alunos value (null, :codigo, :aluno, :situacao)";
+        $query_1 = $this->connect->prepare($sql_insert_1);
+        $query_1->bindParam(':codigo', $this->codigo);
+        $query_1->bindParam(':aluno', $this->formData['aluno']);
+        $query_1->bindParam(':situacao', $this->situacao);
+        $query_1->execute();
 
-        $query = $this->connect->prepare($sql_insert);
-
-        $query->bindParam(':codigo', $this->formData['codigo']);
-        $query->bindParam(':aluno', $this->formData['aluno']);
-        $query->bindParam(':situacao', $this->situacao);
-        $query->bindParam(':materia', $this->formData['materia']);
-        $query->bindParam(':nota1', $this->formData['nota1']);
-        $query->bindParam(':nota2', $this->formData['nota2']);
-        $query->bindParam(':media', $media);
-
-        $query->execute();
+        $sql_insert_2 = "insert into notas_alunos value (null, :materia, :nota1, :nota2, :media, :id_aluno)";
+        $query_2 = $this->connect->prepare($sql_insert_2);
+        $query_2->bindParam(':materia', $this->formData['materia']);
+        $query_2->bindParam(':nota1', $this->formData['nota1']);
+        $query_2->bindParam(':nota2', $this->formData['nota2']);
+        $query_2->bindParam(':media', $media);
+        $query_2->bindParam(':id_aluno', $this->formData['id']);
+        $query_2->execute();
 
         // Verifica se foi cadastrado com sucesso!
-        if($query->rowCount()) {
+        if($query_1->rowCount() && $query_2->rowCount()) {
 
             return true;
 
@@ -92,11 +105,11 @@ class Controle extends Conexao {
     }
 
     // Recupera o último código de aluno cadastrado
-    public function ultimoCodAlunos() {
+    public function ultimoCodAluno(): string {
 
         $this->connect = $this->connectDb();
 
-        $sql_select = 'select cod from boletim_alunos';
+        $sql_select = 'select codigo from boletim_alunos';
 
         $query = $this->connect->prepare($sql_select);
         $query->execute();
@@ -107,7 +120,7 @@ class Controle extends Conexao {
 
         foreach ($codigos as $codigo => $valor) {
 
-            $ultimo_codigo = $valor['cod'];
+            $ultimo_codigo = $valor['codigo'];
 
         }
 

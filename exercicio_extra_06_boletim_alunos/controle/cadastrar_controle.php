@@ -3,7 +3,7 @@
 $controle = new Controle();
 
 // Armazena o último código de aluno cadastrado
-$ultimo_codigo = $controle->ultimoCodAlunos();
+$ultimo_codigo = $controle->ultimoCodAluno();
 $ultimo_codigo += 1;
 
 // Recebe os dados pelo método 'POST' e no formato de string

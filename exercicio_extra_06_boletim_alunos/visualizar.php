@@ -77,22 +77,29 @@ ob_start();
 
                         extract($boletim_alunos);
 
-                        if ($situacao) {
-                            $situacao = '<span style="color: green;">Aprovado</span>';
-                        } else {
-                            $situacao = '<span style="color: tomato;">Reprovado</span>';
+                        // Armazena a situação do aluno
+                        $situacao_aluno;
+
+                        if ($situacao == 1) {
+                            $situacao_aluno = '<span style="color: green;">Aprovado</span>';
+                        } 
+                        else if($situacao == 0) {
+                            $situacao_aluno = '<span style="color: tomato;">Reprovado</span>';
+                        }
+                        else {
+                            $situacao_aluno = '<span style="color: tomato;">Indefinido</span>';
                         }
 
                     ?>
 
                         <tr>
-                            <td style="width: 8%;"><?= $cod ?></td>
+                            <td style="width: 8%;"><?= $codigo ?></td>
                             <td style="width: 43%"><?= $aluno ?></td>
                             <td style="width: 17%"><?= $materia ?></td>
                             <td style="width: 8%;"><?= $nota1 ?></td>
                             <td style="width: 8%;"><?= $nota2 ?></td>
                             <td style="width: 8%;"><?= $media ?></td>
-                            <td style="width: 8%;"><?= $situacao ?></td>
+                            <td style="width: 8%;"><?= $situacao_aluno ?></td>
                         </tr>
 
                     <?php

@@ -36,7 +36,7 @@ require "controle/Controle.php";
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Cód.</th>
+                        <th scope="col">Código</th>
                         <th scope="col">Aluno</th>
                         <th scope="col">Situação</th>
                         <th scope="col">Ações</th>
@@ -62,18 +62,25 @@ require "controle/Controle.php";
 
                         extract($aluno);
 
-                        if ($situacao) {
-                            $situacao = '<span style="color: green;">Aprovado</span>';
-                        } else {
-                            $situacao = '<span style="color: tomato;">Reprovado</span>';
+                        // Armazena a situação do aluno
+                        $situacao_aluno;
+
+                        if ($situacao == 1) {
+                            $situacao_aluno = '<span style="color: green;">Aprovado</span>';
+                        } 
+                        else if($situacao == 0) {
+                            $situacao_aluno = '<span style="color: tomato;">Reprovado</span>';
+                        }
+                        else {
+                            $situacao_aluno = '<span style="color: tomato;">Indefinido</span>';
                         }
 
                     ?>
 
                         <tr>
-                            <td style="width: 10%;"><?= $cod ?></td>
+                            <td style="width: 10%;"><?= $codigo ?></td>
                             <td style="width: 50%;"><?= $aluno ?></td>
-                            <td style="width: 15%;"><?= $situacao ?></td>
+                            <td style="width: 15%;"><?= $situacao_aluno ?></td>
                             <td style="width: 25%;">
                                 <a class="nav-link d-inline-block me-2 text-success" href="visualizar.php?id=<?= $id ?>">
                                     Visualizar
