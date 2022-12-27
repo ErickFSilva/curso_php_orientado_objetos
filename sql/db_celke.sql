@@ -16,7 +16,8 @@ drop table artigos;
 drop table cad_despesas;
 
 delete from users where id = 7;
-delete from boletim_alunos where codigo = '103';
+delete from boletim_alunos where id = 7;
+delete from notas_alunos where id_boletim = 7;
 
 
 -- CRIANDO TABELA: usuarios
@@ -125,13 +126,12 @@ insert into cad_despesas values(null, 'dia_a_dia', 'Água', 2.50, now());
 -- CRIANDO TABELA: boletim_alunos e notas_alunos
 create table if not exists boletim_alunos (
 	id int primary key auto_increment,
-    codigo varchar(4) not null,
+    codigo int not null,
     aluno varchar(128) not null,
-    situacao int
+    situacao int default 2
 );
 
-insert into boletim_alunos value (null, '101', 'Erick Ferreira', 1);
-insert into boletim_alunos value (null, '102', 'Raquezia Ferreira', 1);
+insert into boletim_alunos (codigo, aluno) value (100, 'Default');
 
 create table if not exists notas_alunos (
 	id int primary key auto_increment,
@@ -143,8 +143,8 @@ create table if not exists notas_alunos (
     foreign key(id_boletim) references boletim_alunos (id)
 );
 
-insert into notas_alunos value (null, 'Programação', 10.0, 8.0, 9.0, 1);
-insert into notas_alunos value (null, 'Gerais', 9.0, 10.0, 9.5, 2);
+insert into notas_alunos (materia, id_boletim) value ('Default', 1);
+insert into notas_alunos (materia, id_boletim) value ('mysql', 8);
 
 
 -- SELECTS
@@ -164,7 +164,19 @@ select * from cad_despesas order by id desc;
 
 select ba.id, ba.codigo, ba.aluno, na.materia, na.nota1, na.nota2, na.media, ba.situacao
 from boletim_alunos ba
-inner join notas_alunos na on (ba.id = na.id_boletim)
-where ba.id = 1;
+left join notas_alunos na on (ba.id = na.id_boletim);
+
+select id from boletim_alunos;
 
 select codigo from boletim_alunos;
+
+update boletim_alunos as ba 
+inner join notas_alunos as na 
+on (ba.id = na.id_boletim) 
+set ba.aluno = 'Erick', 
+    ba.situacao = 1, 
+    na.materia = 'php', 
+    na.nota1 = 10,
+    na.nota2 = 10,
+    na.media = 10
+where ba.id = 3;

@@ -23,9 +23,9 @@ require "controle/Controle.php";
 
 <body class="bg-light">
 
-    <?php 
-        $pagina = 'home';
-        require "navegacao.php"; 
+    <?php
+    $pagina = 'home';
+    require "navegacao.php";
     ?>
 
     <div class="container mt-4">
@@ -67,33 +67,52 @@ require "controle/Controle.php";
 
                         if ($situacao == 1) {
                             $situacao_aluno = '<span style="color: green;">Aprovado</span>';
-                        } 
-                        else if($situacao == 0) {
+                        } else if ($situacao == 0) {
                             $situacao_aluno = '<span style="color: tomato;">Reprovado</span>';
-                        }
-                        else {
-                            $situacao_aluno = '<span style="color: tomato;">Indefinido</span>';
+                        } else if ($situacao == 2) {
+                            $situacao_aluno = '<span class="text-info">Indefinido</span>';
                         }
 
-                    ?>
+                        if ($codigo == 100) { ?>
+                            <tr class="d-none">
+                                <td style="width: 10%;"><?= $codigo ?></td>
+                                <td style="width: 50%;"><?= $aluno ?></td>
+                                <td style="width: 15%;"><?= $situacao_aluno ?></td>
+                                <td style="width: 25%;">
+                                    <a class="nav-link d-inline-block me-2 text-success" href="visualizar.php?id=<?= $id ?>">
+                                        Visualizar
+                                    </a>
 
-                        <tr>
-                            <td style="width: 10%;"><?= $codigo ?></td>
-                            <td style="width: 50%;"><?= $aluno ?></td>
-                            <td style="width: 15%;"><?= $situacao_aluno ?></td>
-                            <td style="width: 25%;">
-                                <a class="nav-link d-inline-block me-2 text-success" href="visualizar.php?id=<?= $id ?>">
-                                    Visualizar
-                                </a>
-                                
-                                <a class="nav-link d-inline-block me-2 text-primary" href="#">
-                                    Editar
-                                </a>
-                                <a class="nav-link d-inline-block me-2 text-danger" href="#">
-                                    Excluir
-                                </a>
-                            </td>
-                        </tr>
+                                    <a class="nav-link d-inline-block me-2 text-primary" href="editar.php?id=<?= $id ?>">
+                                        Editar
+                                    </a>
+                                    <a class="nav-link d-inline-block me-2 text-danger" href="#">
+                                        Excluir
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php 
+                        } else {
+                        ?>
+
+                            <tr>
+                                <td style="width: 10%;"><?= $codigo ?></td>
+                                <td style="width: 50%;"><?= $aluno ?></td>
+                                <td style="width: 15%;"><?= $situacao_aluno ?></td>
+                                <td style="width: 25%;">
+                                    <a class="nav-link d-inline-block me-2 text-success" href="visualizar.php?id=<?= $id ?>">
+                                        Visualizar
+                                    </a>
+
+                                    <a class="nav-link d-inline-block me-2 text-primary" href="editar.php?id=<?= $id ?>">
+                                        Editar
+                                    </a>
+                                    <a class="nav-link d-inline-block me-2 text-danger" href="#">
+                                        Excluir
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php } ?>
 
                     <?php } ?>
 

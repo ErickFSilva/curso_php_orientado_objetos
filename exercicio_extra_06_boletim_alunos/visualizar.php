@@ -75,35 +75,44 @@ ob_start();
                         // Instancia o método 'visualizar()', transformando uma variável em array
                         $boletim_alunos = $controle->visualizar();
 
-                        extract($boletim_alunos);
+                        foreach ($boletim_alunos as $aluno => $valor) {
+                            
+                            extract($valor);
 
-                        // Armazena a situação do aluno
-                        $situacao_aluno;
+                            // Armazena a situação do aluno
+                            $situacao_aluno = null;
 
-                        if ($situacao == 1) {
-                            $situacao_aluno = '<span style="color: green;">Aprovado</span>';
-                        } 
-                        else if($situacao == 0) {
-                            $situacao_aluno = '<span style="color: tomato;">Reprovado</span>';
+                            if ($valor['situacao'] == '1') {
+
+                                $situacao_aluno = '<span style="color: green;">Aprovado</span>';
+
+                            } else if ($valor['situacao'] == '0') {
+
+                                $situacao_aluno = '<span style="color: tomato;">Reprovado</span>';
+
+                            } else if ($valor['situacao'] == '2') {
+
+                                $situacao_aluno = '<span class="text-info">Indefinido</span>';
+
+                            }
+
+                        ?>
+
+                            <tr>
+                                <td style="width: 8%;"><?= $codigo ?></td>
+                                <td style="width: 43%"><?= $aluno ?></td>
+                                <td style="width: 17%"><?= $materia ?></td>
+                                <td style="width: 8%;"><?= $nota1 ?></td>
+                                <td style="width: 8%;"><?= $nota2 ?></td>
+                                <td style="width: 8%;"><?= $media ?></td>
+                                <td style="width: 8%;"><?= $situacao_aluno ?></td>
+                            </tr>
+
+                        <?php
                         }
-                        else {
-                            $situacao_aluno = '<span style="color: tomato;">Indefinido</span>';
-                        }
-
-                    ?>
-
-                        <tr>
-                            <td style="width: 8%;"><?= $codigo ?></td>
-                            <td style="width: 43%"><?= $aluno ?></td>
-                            <td style="width: 17%"><?= $materia ?></td>
-                            <td style="width: 8%;"><?= $nota1 ?></td>
-                            <td style="width: 8%;"><?= $nota2 ?></td>
-                            <td style="width: 8%;"><?= $media ?></td>
-                            <td style="width: 8%;"><?= $situacao_aluno ?></td>
-                        </tr>
+                        ?>
 
                     <?php
-
                     } else {
 
                         $_SESSION['msg'] = '<p style="color: #f00;">Erro: Usuário não encontrado!</p>';

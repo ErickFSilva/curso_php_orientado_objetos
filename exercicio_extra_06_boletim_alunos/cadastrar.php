@@ -56,9 +56,9 @@ require "controle/Controle.php";
                     </fieldset>
 
                     <fieldset class="mb-3">
-                        <legend class="text-secondary"># Matéria e Notas</legend>
+                        <legend class="text-secondary"># Matéria</legend>
 
-                        <div class="mb-3">
+                        <div class="mb-3 w-50">
                             <label for="materia">Matéria:</label>
                             <select class="form-select" name="materia" id="materia" required>
                                 <option value="">--- Selecione ---</option>
@@ -78,17 +78,6 @@ require "controle/Controle.php";
                                 <option value="redes">Redes</option>
                                 <option value="seguranca">Segurança</option>
                             </select>
-                        </div>
-                        <div class="mb-3">
-                            <div class="d-inline-block me-4">
-                                <label for="nota1">Nota 1:</label>
-                                <input type="number" id="nota1" name="nota1" value="0" min="0" max="10" class="form-control" style="width: 70px;">
-                            </div>
-
-                            <div class="d-inline-block">
-                                <label for="nota2">Nota 2:</label>
-                                <input type="number" id="nota2" name="nota2" value="0" min="0" max="10" class="form-control" style="width: 70px;">
-                            </div>
                         </div>
                     </fieldset>
 
