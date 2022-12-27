@@ -7,6 +7,7 @@ class Controle extends Conexao
     private object $connect;
     public array $formData;
     public int $id;
+    public string $materia;
     public $ultimoId;
     public string $codigo;
     public int $situacao;
@@ -47,6 +48,26 @@ class Controle extends Conexao
         $query->execute();
 
         return $query->fetchAll();
+    }
+
+    public function visualizar2(): array
+    {
+        // Instancia a classe e cria o objeto
+        $this->connect = $this->connectDb();
+
+        $sqlSelect = '
+            select ba.id, ba.codigo, ba.aluno, na.materia, na.nota1, na.nota2, na.media, ba.situacao
+            from boletim_alunos ba
+            left join notas_alunos na on (ba.id = na.id_boletim)
+            where ba.id = :id and na.materia = :materia
+        ';
+
+        $query = $this->connect->prepare($sqlSelect);
+        $query->bindParam(':id', $this->id);
+        $query->bindParam(':materia', $this->materia);
+        $query->execute();
+
+        return $query->fetch();
     }
 
     // Cadastra novos alunos
@@ -135,6 +156,74 @@ class Controle extends Conexao
                 na.nota2 = :nota2,
                 na.media = :media
             where ba.id = :id
+        ";
+
+        $query = $this->connect->prepare($sql_update);
+
+        $query->bindParam(':id', $this->formData['id']);
+        $query->bindParam(':aluno', $this->formData['aluno']);
+        $query->bindParam(':situacao', $this->situacao);
+        $query->bindParam(':materia', $this->formData['materia']);
+        $query->bindParam(':nota1', $this->nota1);
+        $query->bindParam(':nota2', $this->nota2);
+        $query->bindParam(':media', $this->media);
+
+        $query->execute();
+
+        if($query->rowCount()) {
+            return true;
+        } 
+        else {
+            return false;
+        }
+    }
+
+    public function editar2()//: bool
+    {
+        // Debugg do código
+        echo '<pre>';
+        var_dump($this->formData);
+        echo '</pre>';
+
+        // Calculando média e definindo 'situação' do aluno
+        if(is_string($this->formData['nota1']) && empty($this->formData['nota1'])) {
+            $this->nota1 = 0.0;
+        }
+        else {
+            $this->nota1 = $this->formData['nota1'];
+        }
+
+        if(is_string($this->formData['nota2']) && empty($this->formData['nota2'])) {
+            $this->nota2 = 0.0;
+        }
+        else {
+            $this->nota2 = $this->formData['nota2'];
+        }
+
+        $this->media = ($this->nota1 + $this->nota2) / 2;
+
+        // Define a situação do aluno
+        if($this->media >= 6) {
+            $this->situacao = 1;
+        }
+        else {
+            $this->situacao = 0;
+        }
+
+        // Instancia a classe e cria o objeto
+        $this->connect = $this->connectDb();
+
+        $sql_update = "
+            update boletim_alunos as ba 
+            inner join notas_alunos as na 
+            on (ba.id = na.id_boletim) 
+            set ba.aluno = :aluno, 
+                ba.situacao = :situacao, 
+                na.materia = :materia, 
+                na.nota1 = :nota1,
+                na.nota2 = :nota2,
+                na.media = :media
+            where ba.id = :id and na.materia = :materia
         ";
 
         $query = $this->connect->prepare($sql_update);

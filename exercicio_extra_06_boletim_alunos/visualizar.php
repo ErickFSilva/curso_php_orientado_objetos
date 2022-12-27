@@ -41,6 +41,7 @@ ob_start();
                         <th scope="col">2ª Nota</th>
                         <th scope="col">Média</th>
                         <th scope="col">Situação</th>
+                        <th scope="col">Controle</th>
                     </tr>
                 </thead>
 
@@ -99,13 +100,18 @@ ob_start();
                         ?>
 
                             <tr>
-                                <td style="width: 8%;"><?= $codigo ?></td>
-                                <td style="width: 43%"><?= $aluno ?></td>
+                                <td style="width: 7%;"><?= $codigo ?></td>
+                                <td style="width: 36%"><?= $aluno ?></td>
                                 <td style="width: 17%"><?= $materia ?></td>
                                 <td style="width: 8%;"><?= $nota1 ?></td>
                                 <td style="width: 8%;"><?= $nota2 ?></td>
                                 <td style="width: 8%;"><?= $media ?></td>
                                 <td style="width: 8%;"><?= $situacao_aluno ?></td>
+                                <td class="text-bg-secondary text-center" style="width: 8%;">
+                                    <a class="nav-link d-block" href="editar.php?id=<?= $id ?>&&materia=<?= $materia ?>">
+                                        Editar
+                                    </a>
+                                </td>
                             </tr>
 
                         <?php

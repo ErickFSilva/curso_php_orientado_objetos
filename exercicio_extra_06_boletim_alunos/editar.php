@@ -58,7 +58,7 @@ require "controle/Controle.php";
 
                 $controle->formData = $form_data;
 
-                $valor_msg = $controle->editar();
+                $valor_msg = $controle->editar2();
 
                 if ($valor_msg) {
 
@@ -71,17 +71,23 @@ require "controle/Controle.php";
                 }
             }
 
-            // Recebe o ID do usuário via 'GET'
+            // Recebe o 'id' do usuário via 'GET'
             $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+            $materia = filter_input(INPUT_GET, 'materia', FILTER_DEFAULT);
             
             // Verifica se 'id' possiu valor
             if (!empty($id)) {
 
-                // Envia o 'id', recuperado pelo GET, para o atributo 'id' da classe 'Controle'
+                // Envia o 'id' e a 'materia', recuperado pelo GET, para o atributo 'id' e 'materia' da classe 'Controle'
                 $controle->id = $id;
+                $controle->materia = $materia;
 
                 // Instanciando o método visualizar
-                $boletim_alunos = $controle->visualizar();
+                $boletim_alunos = $controle->visualizar2();
+
+                // echo '<pre>';
+                // var_dump($boletim_alunos);
+                // echo '</pre>';
 
                 extract($boletim_alunos);
 
@@ -104,7 +110,12 @@ require "controle/Controle.php";
 
                             <div class="mb-3">
                                 <label for="aluno">Aluno:</label>
-                                <input type="text" value="<?= $aluno ?>" class="form-control" name="aluno" id="aluno" required>
+
+                                <!-- Campo que enviará os dados -->
+                                <input type="hidden" value="<?= $aluno ?>" class="form-control" name="aluno" id="aluno">
+
+                                <!-- Apenas para exibição -->
+                                <input type="text" value="<?= $aluno ?>" class="form-control" disabled>
                             </div>
                         </fieldset>
 
@@ -113,7 +124,12 @@ require "controle/Controle.php";
 
                             <div class="mb-3 w-50">
                                 <label for="materia">Matéria:</label>
-                                <input type="text" value="<?= $materia ?>" class="form-control" name="materia" id="materia" required>
+
+                                <!-- Campo que enviará os dados -->
+                                <input class="form-control" type="hidden" name="materia" id="materia" value="<?= $materia ?>">
+
+                                <!-- Apenas para exibição -->
+                                <input class="form-control" type="text" value="<?= $materia ?>" disabled>
                             </div>
                             <div class="mb-3">
                                 <div class="d-inline-block me-4">

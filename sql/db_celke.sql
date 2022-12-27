@@ -16,8 +16,8 @@ drop table artigos;
 drop table cad_despesas;
 
 delete from users where id = 7;
-delete from boletim_alunos where id = 7;
-delete from notas_alunos where id_boletim = 7;
+delete from boletim_alunos where id = 8;
+delete from notas_alunos where id_boletim = 8;
 
 
 -- CRIANDO TABELA: usuarios
@@ -169,6 +169,11 @@ left join notas_alunos na on (ba.id = na.id_boletim);
 select id from boletim_alunos;
 
 select codigo from boletim_alunos;
+
+select ba.id, ba.codigo, ba.aluno, na.materia, na.nota1, na.nota2, na.media, ba.situacao
+from boletim_alunos ba
+left join notas_alunos na on (ba.id = na.id_boletim)
+where ba.id = 8 and na.materia = 'php' limit 1;
 
 update boletim_alunos as ba 
 inner join notas_alunos as na 

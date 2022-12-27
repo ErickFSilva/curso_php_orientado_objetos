@@ -39,7 +39,7 @@ require "controle/Controle.php";
                         <th scope="col">Código</th>
                         <th scope="col">Aluno</th>
                         <th scope="col">Situação</th>
-                        <th scope="col">Ações</th>
+                        <th scope="col">Controles</th>
                     </tr>
                 </thead>
 
@@ -82,10 +82,6 @@ require "controle/Controle.php";
                                     <a class="nav-link d-inline-block me-2 text-success" href="visualizar.php?id=<?= $id ?>">
                                         Visualizar
                                     </a>
-
-                                    <a class="nav-link d-inline-block me-2 text-primary" href="editar.php?id=<?= $id ?>">
-                                        Editar
-                                    </a>
                                     <a class="nav-link d-inline-block me-2 text-danger" href="#">
                                         Excluir
                                     </a>
@@ -103,10 +99,9 @@ require "controle/Controle.php";
                                     <a class="nav-link d-inline-block me-2 text-success" href="visualizar.php?id=<?= $id ?>">
                                         Visualizar
                                     </a>
-
-                                    <a class="nav-link d-inline-block me-2 text-primary" href="editar.php?id=<?= $id ?>">
+                                    <!-- <a class="nav-link d-inline-block me-2 text-primary" href="editar.php?id=<?= $id ?>">
                                         Editar
-                                    </a>
+                                    </a> -->
                                     <a class="nav-link d-inline-block me-2 text-danger" href="#">
                                         Excluir
                                     </a>
