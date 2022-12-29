@@ -25,16 +25,7 @@ ob_start();
     <div class="container">
         <div class="row">
 
-            <nav class="navbar navbar-expand navbar-dark bg-dark mb-4">
-                <ul class="navbar-nav">
-                    <li class="navbar-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">Listar</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="nav-link" href="Create.php">Cadastrar</a>
-                    </li>
-                </ul>
-            </nav>
+            <?php require "navegacao.php" ?>
 
             <h1 class="mb-4">Detalhes do Usuário</h1>
 

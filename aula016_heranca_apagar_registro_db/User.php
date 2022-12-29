@@ -89,4 +89,16 @@ class User extends Conn
         }
 
     }
+
+    public function delete(): bool 
+    {
+        $this->conn = $this->connectDb();
+        
+        $query_user = "delete from users where id=:id limit 1";
+        
+        $delete_user = $this->conn->prepare($query_user);
+        $delete_user->bindParam(':id', $this->id);
+
+        return $delete_user->execute();
+    }
 }

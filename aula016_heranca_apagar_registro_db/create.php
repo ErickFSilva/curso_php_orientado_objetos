@@ -26,16 +26,7 @@ require "User.php";
     <div class="container">
         <div class="row">
 
-            <nav class="navbar navbar-expand navbar-dark bg-dark mb-4">
-                <ul class="navbar-nav">
-                    <li class="navbar-item">
-                        <a class="nav-link" href="index.php">Listar</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="nav-link active" aria-current="page" href="Create.php">Cadastrar</a>
-                    </li>
-                </ul>
-            </nav>
+            <?php require "navegacao.php" ?>
 
             <h1 class="mb-4">Cadastrar Usuário</h1>
 

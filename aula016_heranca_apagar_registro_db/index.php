@@ -25,47 +25,39 @@ require "User.php";
     <div class="container">
         <div class="row">
 
-            <nav class="navbar navbar-expand navbar-dark bg-dark mb-4">
-                <ul class="navbar-nav">
-                    <li class="navbar-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">Listar</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="nav-link" href="Create.php">Cadastrar</a>
-                    </li>
-                </ul>
-            </nav>
+            <div class="col-12">
+                <?php require "navegacao.php" ?>
 
-            <h1 class="mb-4">Listar Usuário</h1>
+                <h1 class="mb-4">Listar Usuário</h1>
 
-            <?php
+                <?php
 
-            if(isset($_SESSION['msg'])) {
+                if (isset($_SESSION['msg'])) {
 
-                echo $_SESSION['msg'];
+                    echo $_SESSION['msg'];
 
-                // Destroi o conteúdo da variável global após a sua impressão
-                unset($_SESSION['msg']);
+                    // Destroi o conteúdo da variável global após a sua impressão
+                    unset($_SESSION['msg']);
+                }
 
-            }
+                $listUser = new User();
+                $result_users = $listUser->list();
 
-            $listUser = new User();
-            $result_users = $listUser->list();
+                foreach ($result_users as $row_user) {
 
-            foreach($result_users as $row_user) {
+                    extract($row_user);
 
-                extract($row_user);
+                    echo "ID: $id <br>";
+                    echo "Nome: $name <br>";
+                    echo "E-mail: $email <br><br>";
+                    echo "<a class='nav-link text-primary' href='view.php?id=$id' class='nav-link text-primary'>Visualizar</a>";
+                    echo "<a class='nav-link text-primary' href='edit.php?id=$id' class='nav-link text-primary'>Editar</a>";
+                    echo "<a class='nav-link text-primary' href='delete.php?id=$id' class='nav-link text-primary'>Apagar</a>";
+                    echo "<hr>";
+                }
 
-                echo "ID: $id <br>";
-                echo "Nome: $name <br>";
-                echo "E-mail: $email <br>";
-                echo "<a href='view.php?id=$id' class='nav-link text-primary'>Visualizar</a><br>";
-                echo "<a href='edit.php?id=$id' class='nav-link text-primary'>Editar</a><br>";
-                echo "<hr>";
-                
-            }
-
-            ?>
+                ?>
+            </div>
 
         </div>
     </div>
