@@ -34,7 +34,7 @@ require "controle/Controle.php";
     <div class="container mt-4">
         <div class="row">
 
-            <h1 class="mb-4 h3 text-secondary">Cadastrar Aluno</h1>
+            <h1 class="mb-4 h3 text-secondary">Editar Aluno</h1>
 
             <?php
 

@@ -70,6 +70,25 @@ class Controle extends Conexao
         return $query->fetch();
     }
 
+    public function visualizar3($id_addMateria): array
+    {
+        // Instancia a classe e cria o objeto
+        $this->connect = $this->connectDb();
+
+        $sqlSelect = '
+            select ba.id, ba.codigo, ba.aluno, na.materia, na.nota1, na.nota2, na.media, ba.situacao
+            from boletim_alunos ba
+            left join notas_alunos na on (ba.id = na.id_boletim)
+            where ba.id = :id limit 1
+        ';
+
+        $query = $this->connect->prepare($sqlSelect);
+        $query->bindParam(':id', $id_addMateria);
+        $query->execute();
+
+        return $query->fetch();
+    }
+
     // Cadastra novos alunos
     public function cadastrar(): bool
     {
@@ -106,6 +125,33 @@ class Controle extends Conexao
         }
     }
 
+    public function addMateria(): bool
+    {
+        // echo '<pre>';
+        // var_dump($this->formData);
+        // echo '</pre>';
+
+        // Instancia a classe e cria o objeto
+        $this->connect = $this->connectDb();
+
+        // Insert na tabela 'notas_alunos'
+        $sql_insert = "insert into notas_alunos (materia, id_boletim) value (:materia, :id_boletim)";
+        
+        $query = $this->connect->prepare($sql_insert);
+
+        $query->bindParam(':materia', $this->formData['materia']);
+        $query->bindParam(':id_boletim', $this->formData['id']);
+
+        $query->execute();
+
+        // Verifica se foi cadastrado com sucesso!
+        if ($query->rowCount()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // Situação do aluno
     public function editar(): bool
     {
@@ -118,27 +164,24 @@ class Controle extends Conexao
         // echo '</pre>';
 
         // Calculando média e definindo 'situação' do aluno
-        if(is_string($this->formData['nota1']) && empty($this->formData['nota1'])) {
+        if (is_string($this->formData['nota1']) && empty($this->formData['nota1'])) {
             $this->nota1 = 0.0;
-        }
-        else {
+        } else {
             $this->nota1 = $this->formData['nota1'];
         }
 
-        if(is_string($this->formData['nota2']) && empty($this->formData['nota2'])) {
+        if (is_string($this->formData['nota2']) && empty($this->formData['nota2'])) {
             $this->nota2 = 0.0;
-        }
-        else {
+        } else {
             $this->nota2 = $this->formData['nota2'];
         }
 
         $this->media = ($this->nota1 + $this->nota2) / 2;
 
         // Define a situação do aluno
-        if($this->media >= 6) {
+        if ($this->media >= 6) {
             $this->situacao = 1;
-        }
-        else {
+        } else {
             $this->situacao = 0;
         }
 
@@ -170,15 +213,14 @@ class Controle extends Conexao
 
         $query->execute();
 
-        if($query->rowCount()) {
+        if ($query->rowCount()) {
             return true;
-        } 
-        else {
+        } else {
             return false;
         }
     }
 
-    public function editar2()//: bool
+    public function editar2() //: bool
     {
         // Debugg do código
         echo '<pre>';
@@ -186,27 +228,24 @@ class Controle extends Conexao
         echo '</pre>';
 
         // Calculando média e definindo 'situação' do aluno
-        if(is_string($this->formData['nota1']) && empty($this->formData['nota1'])) {
+        if (is_string($this->formData['nota1']) && empty($this->formData['nota1'])) {
             $this->nota1 = 0.0;
-        }
-        else {
+        } else {
             $this->nota1 = $this->formData['nota1'];
         }
 
-        if(is_string($this->formData['nota2']) && empty($this->formData['nota2'])) {
+        if (is_string($this->formData['nota2']) && empty($this->formData['nota2'])) {
             $this->nota2 = 0.0;
-        }
-        else {
+        } else {
             $this->nota2 = $this->formData['nota2'];
         }
 
         $this->media = ($this->nota1 + $this->nota2) / 2;
 
         // Define a situação do aluno
-        if($this->media >= 6) {
+        if ($this->media >= 6) {
             $this->situacao = 1;
-        }
-        else {
+        } else {
             $this->situacao = 0;
         }
 
@@ -238,10 +277,9 @@ class Controle extends Conexao
 
         $query->execute();
 
-        if($query->rowCount()) {
+        if ($query->rowCount()) {
             return true;
-        } 
-        else {
+        } else {
             return false;
         }
     }
