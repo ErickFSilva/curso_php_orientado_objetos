@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+.btn-add-rece, .btn-add-desp {
+    text-align: right;
+}
+
+.btn-add-rece a, .btn-add-desp a {
+    padding: 5px 10px;
+    display: inline-block;
+    border: 1px solid slategray;
+    border-radius: 50%;
+    text-decoration: none;
+    font: bold 22px Verdana;
+    color: #fff;
+    background-color: darkslateblue;
+}

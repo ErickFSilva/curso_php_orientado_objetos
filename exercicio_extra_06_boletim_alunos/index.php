@@ -36,10 +36,11 @@ require "controle/Controle.php";
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">Código</th>
-                        <th scope="col">Aluno</th>
-                        <th scope="col">Situação</th>
-                        <th scope="col">Controles</th>
+                        <th scope="col" style="width: 10%;">Código</th>
+                        <th scope="col" style="width: 50%;">Aluno</th>
+                        <th scope="col" style="width: 20%;">Situação</th>
+                        <th scope="col" style="width: 10%;"></th>
+                        <th scope="col" style="width: 10%;"></th>
                     </tr>
                 </thead>
 
@@ -75,10 +76,10 @@ require "controle/Controle.php";
 
                         if ($codigo == 100) { ?>
                             <tr class="d-none">
-                                <td style="width: 10%;"><?= $codigo ?></td>
-                                <td style="width: 50%;"><?= $aluno ?></td>
-                                <td style="width: 15%;"><?= $situacao_aluno ?></td>
-                                <td style="width: 25%;">
+                                <td><?= $codigo ?></td>
+                                <td><?= $aluno ?></td>
+                                <td><?= $situacao_aluno ?></td>
+                                <td>
                                     <a class="nav-link d-inline-block me-2 text-success" href="visualizar.php?id=<?= $id ?>">
                                         Visualizar
                                     </a>
@@ -92,17 +93,16 @@ require "controle/Controle.php";
                         ?>
 
                             <tr>
-                                <td style="width: 10%;"><?= $codigo ?></td>
-                                <td style="width: 50%;"><?= $aluno ?></td>
-                                <td style="width: 15%;"><?= $situacao_aluno ?></td>
-                                <td style="width: 25%;">
-                                    <a class="nav-link d-inline-block me-2 text-success" href="visualizar.php?id=<?= $id ?>">
+                                <td><?= $codigo ?></td>
+                                <td><?= $aluno ?></td>
+                                <td><?= $situacao_aluno ?></td>
+                                <td class="text-bg-primary text-center">
+                                    <a class="nav-link" href="visualizar.php?id=<?= $id ?>">
                                         Visualizar
                                     </a>
-                                    <!-- <a class="nav-link d-inline-block me-2 text-primary" href="editar.php?id=<?= $id ?>">
-                                        Editar
-                                    </a> -->
-                                    <a class="nav-link d-inline-block me-2 text-danger" href="#">
+                                </td>
+                                <td class="text-bg-danger text-center">
+                                    <a class="nav-link" href="controle/delete.php?id=<?= $id ?>">
                                         Excluir
                                     </a>
                                 </td>

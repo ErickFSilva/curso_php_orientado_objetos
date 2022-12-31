@@ -13,34 +13,39 @@ $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 // var_dump($id);
 // echo '</pre>';
 
-// Verificar se o 'id' possui valor
+// Verifica se o 'id' possui valor
 if(!empty($id)) {
 
-    // Incluir os arquivos
-    require "Conn.php";
-    require "User.php";
+    // Incluir os arquivos 'Conexao' e 'Controle' ao arquivo
+    require "Conexao.php";
+    require "Controle.php";
 
-    // Instanciar a classe e criar objetos
-    $deliteUser = new User();
-
-    // Enviar o 'id' para o atributo da classe 'User'
-    $deliteUser->id = $id;
-
-    // Instanciar o método apagar
-    $value = $deliteUser->delete();
+    // Instancia a classe e cria o objeto de 'Controle'
+    $controle = new Controle();
     
-    if($value) {
+    // Envia o 'id', recebido por GET, para a classe 'Controle'
+    $controle->id = $id;
+
+    // Instancia o método 'apagar'
+    $retorno = $controle->deletar();
+
+    if($retorno) {
+
         $_SESSION['msg'] = '<p class="text-success">Usuário deletado com sucesso!</p>';
-        header("Location: index.php");
+        header("Location: ../index.php");
+
     }
     else {
+
         $_SESSION['msg'] = '<p class="text-danger">Erro: Usuário não deletado!</p>';
-        header("Location: index.php");
+        header("Location: ../index.php");
+
     }
+
 }
 else {
 
     $_SESSION['msg'] = '<p class="text-danger">Erro: Usuário não encontrado!</p>';
-    header("Location: index.php");
+    header('Location: index.php');
 
 }

@@ -8,7 +8,7 @@ abstract class Conexao
     private string $port = "3306";
     private string $dbname = "db_celke";
     private string $user = "root";
-    private string $pass = "";
+    private string $pass = "root";
     public object $connect;
 
     // Métodos

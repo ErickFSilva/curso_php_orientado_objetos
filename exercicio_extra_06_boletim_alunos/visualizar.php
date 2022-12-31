@@ -35,14 +35,14 @@ ob_start();
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Cód.</th>
-                            <th scope="col">Aluno</th>
-                            <th scope="col">Matéria</th>
-                            <th scope="col">1ª nota</th>
-                            <th scope="col">2ª Nota</th>
-                            <th scope="col">Média</th>
-                            <th scope="col">Situação</th>
-                            <th scope="col">Controle</th>
+                            <th scope="col" style="width: 7%;">Cód.</th>
+                            <th scope="col" style="width: 36%">Aluno</th>
+                            <th scope="col" style="width: 17%">Matéria</th>
+                            <th scope="col" style="width: 8%;">1ª nota</th>
+                            <th scope="col" style="width: 8%;">2ª Nota</th>
+                            <th scope="col" style="width: 8%;">Média</th>
+                            <th scope="col" style="width: 8%;">Situação</th>
+                            <th scope="col" style="width: 8%;"></th>
                         </tr>
                     </thead>
 
@@ -114,14 +114,14 @@ ob_start();
                             ?>
 
                                 <tr>
-                                    <td style="width: 7%;"><?= $codigo ?></td>
-                                    <td style="width: 36%"><?= $aluno ?></td>
-                                    <td style="width: 17%"><?= $materia ?></td>
-                                    <td style="width: 8%;"><?= $nota1 ?></td>
-                                    <td style="width: 8%;"><?= $nota2 ?></td>
-                                    <td style="width: 8%;"><?= $media ?></td>
-                                    <td style="width: 8%;"><?= $situacao_aluno ?></td>
-                                    <td class="text-bg-warning text-center" style="width: 8%;">
+                                    <td><?= $codigo ?></td>
+                                    <td><?= $aluno ?></td>
+                                    <td><?= $materia ?></td>
+                                    <td><?= $nota1 ?></td>
+                                    <td><?= $nota2 ?></td>
+                                    <td><?= $media ?></td>
+                                    <td><?= $situacao_aluno ?></td>
+                                    <td class="text-bg-warning text-center">
                                         <a class="nav-link" href="editar.php?id=<?= $id ?>&&materia=<?= $materia ?>">
                                             Editar
                                         </a>

@@ -18,6 +18,7 @@ drop table cad_despesas;
 delete from users where id = 7;
 delete from boletim_alunos where id = 8;
 delete from notas_alunos where id_boletim = 8;
+delete from receita;
 
 
 -- CRIANDO TABELA: usuarios
@@ -111,16 +112,27 @@ insert into artigos values(null, 'Artigo II', 'Fusce commodo aliquam tortor non 
 insert into artigos values(null, 'Artigo III', 'Aliquam malesuada, dui sit amet ultrices varius, magna sem vestibulum sem, in pellentesque diam diam sit amet turpis. Duis eleifend condimentum ipsum gravida volutpat. Cras elit lectus, eleifend in placerat sit amet, porttitor id augue. Sed fringilla, eros a dapibus commodo, augue metus semper augue, eu sagittis dui lacus nec velit. Nunc vitae dictum urna. Morbi vel justo quis sapien commodo rutrum. Nullam aliquam id leo a sagittis. Pellentesque sed sapien ipsum. Morbi imperdiet tortor sem, eu lobortis mi mattis et. Donec a lobortis nulla. Aenean ultrices, lectus vel sagittis convallis, mi risus ultrices diam, et interdum erat nisi viverra nisi. Suspendisse rhoncus erat augue, a pharetra lacus auctor sit amet. Quisque euismod, nisl eu finibus ultricies, lectus nisi imperdiet diam, in laoreet massa augue nec ipsum.');
 
 
--- CRIANDO TABELA: cad_despesas
-create table if not exists cad_despesas (
+-- CRIANDO TABELA: receitas
+create table if not exists receita (
 	id int primary key auto_increment,
     tipo varchar(32) not null,
     descricao varchar(256) not null,
-    valor float(6,2) not null,
+    valor decimal(6,2) not null,
     _data date not null
 );
 
-insert into cad_despesas values(null, 'dia_a_dia', 'Água', 2.50, now());
+insert into receita values(null, 'salario_beneficios', 'Salário', 4500.00, now());
+
+-- CRIANDO TABELA: despesas
+create table if not exists despesa (
+	id int primary key auto_increment,
+    tipo varchar(32) not null,
+    descricao varchar(256) not null,
+    valor decimal(6,2) not null,
+    _data date not null
+);
+
+insert into despesa values(null, 'dia_a_dia', 'Água', 2.50, now());
 
 
 -- CRIANDO TABELA: boletim_alunos e notas_alunos
@@ -147,7 +159,7 @@ insert into notas_alunos (materia, id_boletim) value ('Default', 1);
 insert into notas_alunos (materia, id_boletim) value ('mysql', 8);
 
 
--- SELECTS
+-- SELECTs
 select * from usuarios;
 
 select * from users;
@@ -158,9 +170,17 @@ select * from extra_02_clientes_pf;
 
 select * from extra_02_clientes_pj;
 
+select id, tipo, descricao, valor, _data from receita;
+
+select id, tipo, descricao, valor, _data from despesa;
+
 select id, titulo, texto from artigos order by id desc;
 
 select * from cad_despesas order by id desc;
+
+select valor from receita;
+
+select valor from despesa;
 
 select ba.id, ba.codigo, ba.aluno, na.materia, na.nota1, na.nota2, na.media, ba.situacao
 from boletim_alunos ba
@@ -175,6 +195,8 @@ from boletim_alunos ba
 left join notas_alunos na on (ba.id = na.id_boletim)
 where ba.id = 8 and na.materia = 'php' limit 1;
 
+
+-- UPDATEs
 update boletim_alunos as ba 
 inner join notas_alunos as na 
 on (ba.id = na.id_boletim) 

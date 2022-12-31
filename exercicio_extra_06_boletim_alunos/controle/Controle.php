@@ -8,7 +8,7 @@ class Controle extends Conexao
     public array $formData;
     public int $id;
     public string $materia;
-    public $ultimoId;
+    public int $ultimoId;
     public string $codigo;
     public int $situacao;
     public float $nota1;
@@ -153,79 +153,79 @@ class Controle extends Conexao
     }
 
     // Situação do aluno
-    public function editar(): bool
+    // public function editar(): bool
+    // {
+    //     // Debugg do código
+    //     // echo '<pre>';
+    //     // var_dump($this->formData);
+    //     // echo '<hr>';
+    //     // echo gettype($this->formData['nota1']) . '<br>';
+    //     // echo gettype($this->formData['nota2']);
+    //     // echo '</pre>';
+
+    //     // Calculando média e definindo 'situação' do aluno
+    //     if (is_string($this->formData['nota1']) && empty($this->formData['nota1'])) {
+    //         $this->nota1 = 0.0;
+    //     } else {
+    //         $this->nota1 = $this->formData['nota1'];
+    //     }
+
+    //     if (is_string($this->formData['nota2']) && empty($this->formData['nota2'])) {
+    //         $this->nota2 = 0.0;
+    //     } else {
+    //         $this->nota2 = $this->formData['nota2'];
+    //     }
+
+    //     $this->media = ($this->nota1 + $this->nota2) / 2;
+
+    //     // Define a situação do aluno
+    //     if ($this->media >= 6) {
+    //         $this->situacao = 1;
+    //     } else {
+    //         $this->situacao = 0;
+    //     }
+
+    //     // Instancia a classe e cria o objeto
+    //     $this->connect = $this->connectDb();
+
+    //     $sql_update = "
+    //         update boletim_alunos as ba 
+    //         inner join notas_alunos as na 
+    //         on (ba.id = na.id_boletim) 
+    //         set ba.aluno = :aluno, 
+    //             ba.situacao = :situacao, 
+    //             na.materia = :materia, 
+    //             na.nota1 = :nota1,
+    //             na.nota2 = :nota2,
+    //             na.media = :media
+    //         where ba.id = :id
+    //     ";
+
+    //     $query = $this->connect->prepare($sql_update);
+
+    //     $query->bindParam(':id', $this->formData['id']);
+    //     $query->bindParam(':aluno', $this->formData['aluno']);
+    //     $query->bindParam(':situacao', $this->situacao);
+    //     $query->bindParam(':materia', $this->formData['materia']);
+    //     $query->bindParam(':nota1', $this->nota1);
+    //     $query->bindParam(':nota2', $this->nota2);
+    //     $query->bindParam(':media', $this->media);
+
+    //     $query->execute();
+
+    //     if ($query->rowCount()) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
+    public function editar2(): bool
     {
         // Debugg do código
         // echo '<pre>';
         // var_dump($this->formData);
-        // echo '<hr>';
-        // echo gettype($this->formData['nota1']) . '<br>';
-        // echo gettype($this->formData['nota2']);
         // echo '</pre>';
-
-        // Calculando média e definindo 'situação' do aluno
-        if (is_string($this->formData['nota1']) && empty($this->formData['nota1'])) {
-            $this->nota1 = 0.0;
-        } else {
-            $this->nota1 = $this->formData['nota1'];
-        }
-
-        if (is_string($this->formData['nota2']) && empty($this->formData['nota2'])) {
-            $this->nota2 = 0.0;
-        } else {
-            $this->nota2 = $this->formData['nota2'];
-        }
-
-        $this->media = ($this->nota1 + $this->nota2) / 2;
-
-        // Define a situação do aluno
-        if ($this->media >= 6) {
-            $this->situacao = 1;
-        } else {
-            $this->situacao = 0;
-        }
-
-        // Instancia a classe e cria o objeto
-        $this->connect = $this->connectDb();
-
-        $sql_update = "
-            update boletim_alunos as ba 
-            inner join notas_alunos as na 
-            on (ba.id = na.id_boletim) 
-            set ba.aluno = :aluno, 
-                ba.situacao = :situacao, 
-                na.materia = :materia, 
-                na.nota1 = :nota1,
-                na.nota2 = :nota2,
-                na.media = :media
-            where ba.id = :id
-        ";
-
-        $query = $this->connect->prepare($sql_update);
-
-        $query->bindParam(':id', $this->formData['id']);
-        $query->bindParam(':aluno', $this->formData['aluno']);
-        $query->bindParam(':situacao', $this->situacao);
-        $query->bindParam(':materia', $this->formData['materia']);
-        $query->bindParam(':nota1', $this->nota1);
-        $query->bindParam(':nota2', $this->nota2);
-        $query->bindParam(':media', $this->media);
-
-        $query->execute();
-
-        if ($query->rowCount()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function editar2() //: bool
-    {
-        // Debugg do código
-        echo '<pre>';
-        var_dump($this->formData);
-        echo '</pre>';
 
         // Calculando média e definindo 'situação' do aluno
         if (is_string($this->formData['nota1']) && empty($this->formData['nota1'])) {
@@ -282,6 +282,30 @@ class Controle extends Conexao
         } else {
             return false;
         }
+    }
+
+    public function deletar(): bool
+    {
+        $this->connect = $this->connectDb();
+
+        $sql_delete_na = "delete from notas_alunos where id_boletim = :id";
+        $sql_delete_ba = "delete from boletim_alunos where id = :id";
+
+        $query_na = $this->connect->prepare($sql_delete_na);
+        $query_na->bindParam(':id', $this->id);
+        $query_na->execute();
+
+        $query_ba = $this->connect->prepare($sql_delete_ba);
+        $query_ba->bindParam(':id', $this->id);
+        $query_ba->execute();
+
+        if($query_na->rowCount() && $query_ba->rowCount()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 
     // Recupera o último código de aluno cadastrado
