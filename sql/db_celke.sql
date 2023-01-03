@@ -159,6 +159,32 @@ insert into notas_alunos (materia, id_boletim) value ('Default', 1);
 insert into notas_alunos (materia, id_boletim) value ('mysql', 8);
 
 
+-- CRIANDO TABELA: biblioteca_livro
+create table if not exists biblioteca_livro (
+	id int primary key auto_increment,
+    titulo varchar(64) not null,
+    paginas varchar(6)
+);
+
+insert into biblioteca_livro values (null, 'Default', 0);
+
+-- CRIANDO TABELA: biblioteca_autor
+create table if not exists biblioteca_autor (
+	id int primary key auto_increment,
+    nome varchar(64) not null,
+    id_livro int not null,
+    foreign key (id_livro) references biblioteca_livro (id)
+);
+
+-- CRIANDO TABELA: biblioteca_editora
+create table if not exists biblioteca_editora (
+	id int primary key auto_increment,
+    razao varchar(64) not null,
+    id_livro int not null,
+    foreign key (id_livro) references biblioteca_livro (id)
+);
+
+
 -- SELECTs
 select * from usuarios;
 
