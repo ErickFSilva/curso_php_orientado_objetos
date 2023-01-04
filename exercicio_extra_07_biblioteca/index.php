@@ -1,3 +1,10 @@
+<?php
+
+require "controles/Conexao.php";
+require "controles/ControleVisualizar.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -12,13 +19,62 @@
 
 <body>
 
-    <?php require "navegacao.php"; ?>
+    <?php
+
+    require "navegacao.php";
+
+    $controle_visualizar = new ControleVisualizar();
+    $livros = $controle_visualizar->listar();
+
+    ?>
 
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-lg-8 offset-lg-2 border">
-                #
+            <div class="col-md-10 offset-md-1 mt-4">
+
+                <table class="table">
+
+                    <?php
+
+                    foreach ($livros as $livro) {
+
+                        // echo '<pre>';
+                        // var_dump($livro);
+                        // echo '</pre>';
+
+                    ?>
+
+                        <thead>
+                            <tr>
+                                <th>Cód. Livro</th>
+                                <th>Título</th>
+                                <th>Autor</th>
+                                <th>Editora</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr>
+                                <td><?= $livro['cod_livro'] ?></td>
+                                <td><?= $livro['titulo'] ?></td>
+                                <td><?= $livro['autor'] ?></td>
+                                <td><?= $livro['editora'] ?></td>
+                                <td class="text-bg-secondary text-center">
+                                    <a class="nav-link border-bottom border-light" href="visualizar_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>">
+                                        Visualizar
+                                    </a>
+                                    <a class="nav-link" href="pdf/livro_o-livro-dos-espiritos.pdf" target="_blank" title="<?= $livro['titulo'] ?>">
+                                        Baixar
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    <?php } ?>
+
+                </table>
+
             </div>
 
         </div>

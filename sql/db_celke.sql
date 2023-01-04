@@ -3,22 +3,11 @@ create database if not exists db_celke;
 use db_celke;
 
 
--- COMANDOS ADMINISTRATIVOS:
+-- COMANDOS: Geral
 show databases;
 show tables;
 
-desc users;
-
-drop table extra_02_clientes;
-drop table extra_02_clientes_pf;
-drop table extra_02_clientes_pj;
-drop table artigos;
-drop table cad_despesas;
-
-delete from users where id = 7;
-delete from boletim_alunos where id = 8;
-delete from notas_alunos where id_boletim = 8;
-delete from receita;
+desc biblioteca_livro;
 
 
 -- CRIANDO TABELA: usuarios
@@ -28,29 +17,15 @@ create table if not exists usuarios (
     email varchar(220)
 );
 
-insert into usuarios values(null, 'Erick', 'erick@php.br');
-insert into usuarios values(null, 'Gabriel', 'gabriel@php.br');
-insert into usuarios values(null, 'Raquezia', 'raquezia@php.br');
-insert into usuarios values(null, 'Gabriely', 'gabriely@php.br');
-insert into usuarios values(null, 'Fulano', 'fulano@php.br');
-insert into usuarios values(null, 'Beltrano', 'beltrano@php.br');
-
 
 -- CRIANDO A TABELA: users
 create table if not exists users (
 	id int primary key auto_increment,
     name varchar(220),
-    email varchar(220)
+    email varchar(220),
+    created datetime not null default current_timestamp,
+    modified datetime
 );
-
-ALTER TABLE `users` 
-ADD `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `email`, 
-ADD `modified` DATETIME NULL AFTER `created`;
-
-insert into users values(null, 'Erick', 'erick@php.br', now(), null);
-insert into users values(null, 'Gabriel', 'gabriel@php.br', now(), null);
-insert into users values(null, 'Raquezia', 'raquezia@php.br', now(), null);
-insert into users values(null, 'Gabriely', 'gabriely@php.br', now(), null);
 
 
 -- CRIANDO TABELA: extra_02_clientes
@@ -59,15 +34,6 @@ create table if not exists extra_02_clientes (
     email varchar(64) not null,
     endereco varchar(64)
 );
-
-insert into extra_02_clientes values(null, 'erick@php.br', 'Rua Sebastião Paes de Melo');
-insert into extra_02_clientes values(null, 'raquezia@php.br', 'Rua Sebastião Paes de Melo');
-insert into extra_02_clientes values(null, 'manutencao@beneditoeallana.com.br', 'Rua Vinte e Sete-A');
-insert into extra_02_clientes values(null, 'juridico@joanaetatianeconstrucoesltda.com.br', 'Rua Projetada 3');
-insert into extra_02_clientes values(null, 'sistema@joaoelorenaferragensme.com.br', 'Rua Dois Irmãos');
-insert into extra_02_clientes values(null, 'representante@fernandaefelipejoalheria.com.br', 'Rua Raimundo Gomes');
-insert into extra_02_clientes values(null, 'gabriel@php.br', 'Rua Sebastião Paes de Melo');
-insert into extra_02_clientes values(null, '', 'Rua Sebastião Paes de Melo');
 
 
 -- CRIANDO TABELA: extra_02_clientes_pf
@@ -79,11 +45,6 @@ create table if not exists extra_02_clientes_pf (
     foreign key(id_cliente) references extra_02_clientes(id)
 );
 
-insert into extra_02_clientes_pf values(null, 'Erick Ferreira', '12345678901', 1);
-insert into extra_02_clientes_pf values(null, 'Raquézia Ferreira', '23456789012', 2);
-insert into extra_02_clientes_pf values(null, 'Gabriel Ferreira', '', 7);
-insert into extra_02_clientes_pf values(null, 'Gabriely Ferreira', '45678901234', 8);
-
 
 -- CRIANDO TABELA: extra_02_clientes_pj
 create table if not exists extra_02_clientes_pj (
@@ -94,11 +55,6 @@ create table if not exists extra_02_clientes_pj (
     foreign key (id_cliente) references extra_02_clientes(id)
 );
 
-insert into extra_02_clientes_pj values(null, 'Benedito e Allana Assessoria Jurídica ME', '64897250000159', 3);
-insert into extra_02_clientes_pj values(null, 'Joana e Tatiane Construções Ltda', '80583223000168', 4);
-insert into extra_02_clientes_pj values(null, 'Joao e Lorena Ferragens ME', '06562209000125', 5);
-insert into extra_02_clientes_pj values(null, 'Fernanda e Felipe Joalheria ME', '55330211000184', 6);
-
 
 -- CRIANDO TABELA: artigos
 create table if not exists artigos (
@@ -106,10 +62,6 @@ create table if not exists artigos (
     titulo varchar(128) not null,
     texto mediumtext not null
 );
-
-insert into artigos values(null, 'Artigo I', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam suscipit, risus ac pretium tempor, metus tortor accumsan sapien, sed fringilla neque nunc a ex. Vestibulum sed tincidunt augue. Suspendisse interdum diam id sapien egestas, eget ultrices augue maximus. Nulla lobortis non elit eu sagittis. Quisque mollis volutpat euismod. Vivamus ac sapien purus. Phasellus porta neque tempus ante lobortis, at tincidunt ligula blandit.');
-insert into artigos values(null, 'Artigo II', 'Fusce commodo aliquam tortor non vulputate. Morbi dignissim, nisi sed dignissim feugiat, felis ex ultricies massa, quis mattis ipsum mi eget eros. Mauris sed ante mi. Vestibulum eleifend felis leo, id ultrices odio egestas nec. Integer tellus sem, scelerisque congue ex ut, gravida vulputate urna. Curabitur in nulla tellus. Vivamus eget leo urna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut ac faucibus elit. Phasellus faucibus est in urna condimentum mollis. Donec iaculis nulla eu felis tincidunt tincidunt. Donec laoreet semper est sit amet ornare.');
-insert into artigos values(null, 'Artigo III', 'Aliquam malesuada, dui sit amet ultrices varius, magna sem vestibulum sem, in pellentesque diam diam sit amet turpis. Duis eleifend condimentum ipsum gravida volutpat. Cras elit lectus, eleifend in placerat sit amet, porttitor id augue. Sed fringilla, eros a dapibus commodo, augue metus semper augue, eu sagittis dui lacus nec velit. Nunc vitae dictum urna. Morbi vel justo quis sapien commodo rutrum. Nullam aliquam id leo a sagittis. Pellentesque sed sapien ipsum. Morbi imperdiet tortor sem, eu lobortis mi mattis et. Donec a lobortis nulla. Aenean ultrices, lectus vel sagittis convallis, mi risus ultrices diam, et interdum erat nisi viverra nisi. Suspendisse rhoncus erat augue, a pharetra lacus auctor sit amet. Quisque euismod, nisl eu finibus ultricies, lectus nisi imperdiet diam, in laoreet massa augue nec ipsum.');
 
 
 -- CRIANDO TABELA: receitas
@@ -121,7 +73,6 @@ create table if not exists receita (
     _data date not null
 );
 
-insert into receita values(null, 'salario_beneficios', 'Salário', 4500.00, now());
 
 -- CRIANDO TABELA: despesas
 create table if not exists despesa (
@@ -132,8 +83,6 @@ create table if not exists despesa (
     _data date not null
 );
 
-insert into despesa values(null, 'dia_a_dia', 'Água', 2.50, now());
-
 
 -- CRIANDO TABELA: boletim_alunos e notas_alunos
 create table if not exists boletim_alunos (
@@ -143,7 +92,6 @@ create table if not exists boletim_alunos (
     situacao int default 2
 );
 
-insert into boletim_alunos (codigo, aluno) value (100, 'Default');
 
 create table if not exists notas_alunos (
 	id int primary key auto_increment,
@@ -155,74 +103,62 @@ create table if not exists notas_alunos (
     foreign key(id_boletim) references boletim_alunos (id)
 );
 
-insert into notas_alunos (materia, id_boletim) value ('Default', 1);
-insert into notas_alunos (materia, id_boletim) value ('mysql', 8);
-
 
 -- CRIANDO TABELA: biblioteca_livro
 create table if not exists biblioteca_livro (
 	id int primary key auto_increment,
+    cod_livro char(5) not null,
     titulo varchar(64) not null,
-    paginas varchar(6)
+    id_genero int, foreign key (id_genero) references biblioteca_genero (id),
+    paginas varchar(4),
+    resumo text,
+    capa text,
+    id_autor int, foreign key (id_autor) references biblioteca_autor (id),
+    id_editora int, foreign key (id_editora) references biblioteca_editora (id)
 );
 
-insert into biblioteca_livro values (null, 'Default', 0);
+insert into biblioteca_livro value (null, '10001', 'O LIVRO DOS ESPÍRITOS', '', '596', 'PRINCÍPIOS DA DOUTRINA ESPÍRITA: SOBRE A IMORTALIDADE DA ALMA, A NATUREZA DOS ESPÍRITOS E SUAS COM OS HOMENS, AS LEIS MORAIS, A VIDA PRESENTE, A VIDA FUTURA E O PORVIR DA HUMANIDADE — SEGUNDO OS ENSINOS DADOS POR ESPÍRITOS SUPERIORES COM O CONCURSO DE DIVERSOS MÉDIUNS — RECEBIDOS E COORDENADOS.', 'imagens/capa_o-livro-dos-espiritos.jpg', null);
+
+-- CRIANDO TABELA: biblioteca_genero
+create table if not exists biblioteca_genero (
+	id int primary key auto_increment,
+    genero varchar(64) not null
+);
 
 -- CRIANDO TABELA: biblioteca_autor
 create table if not exists biblioteca_autor (
 	id int primary key auto_increment,
-    nome varchar(64) not null,
-    id_livro int not null,
-    foreign key (id_livro) references biblioteca_livro (id)
+    autor varchar(64) not null,
+    espirito varchar(64),
+    id_editora int, foreign key (id_editora) references biblioteca_editora (id)
 );
+
+insert into biblioteca_autor value (null, 'Allan Kardec', 'Diversos', 1);
 
 -- CRIANDO TABELA: biblioteca_editora
 create table if not exists biblioteca_editora (
 	id int primary key auto_increment,
-    razao varchar(64) not null,
-    id_livro int not null,
-    foreign key (id_livro) references biblioteca_livro (id)
+    editora varchar(64) not null,
+    cnpj char(14)
 );
 
-
--- SELECTs
-select * from usuarios;
-
-select * from users;
-
-select * from extra_02_clientes;
-
-select * from extra_02_clientes_pf;
-
-select * from extra_02_clientes_pj;
-
-select id, tipo, descricao, valor, _data from receita;
-
-select id, tipo, descricao, valor, _data from despesa;
-
-select id, titulo, texto from artigos order by id desc;
-
-select * from cad_despesas order by id desc;
-
-select valor from receita;
-
-select valor from despesa;
-
-select ba.id, ba.codigo, ba.aluno, na.materia, na.nota1, na.nota2, na.media, ba.situacao
-from boletim_alunos ba
-left join notas_alunos na on (ba.id = na.id_boletim);
-
-select id from boletim_alunos;
-
-select codigo from boletim_alunos;
-
-select ba.id, ba.codigo, ba.aluno, na.materia, na.nota1, na.nota2, na.media, ba.situacao
-from boletim_alunos ba
-left join notas_alunos na on (ba.id = na.id_boletim)
-where ba.id = 8 and na.materia = 'php' limit 1;
+insert into biblioteca_editora value (null, 'FEB', '12345678901234');
+insert into biblioteca_editora value (null, 'FEB', '56789123456789');
+insert into biblioteca_editora value (null, 'FEB', '01234567890123');
 
 
--- UPDATEs
+-- SELECT
+select id, titulo, paginas, resumo, capa, capa_img from biblioteca_livro;
+select id, autor, id_livro from biblioteca_autor;
+select id, editora, id_livro from biblioteca_editora;
+
+select bl.id, bl.cod_livro, bl.titulo, bl.paginas, bl.resumo, bl.capa, bl.capa_img, ba.autor, be.editora 
+from biblioteca_livro as bl
+inner join biblioteca_autor as ba on (bl.id = ba.id_livro)
+inner join biblioteca_editora as be on (bl.id = be.id_livro);
+
+
+-- UPDATE
 update boletim_alunos as ba 
 inner join notas_alunos as na 
 on (ba.id = na.id_boletim) 
