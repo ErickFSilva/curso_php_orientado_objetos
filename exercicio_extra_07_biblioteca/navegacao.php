@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid d-flex align-items-end">
         
         <spam class="navbar-brand fw-bold fs-4" href="#">Biblioteca</spam>

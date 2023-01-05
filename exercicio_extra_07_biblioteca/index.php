@@ -61,12 +61,9 @@ require "controles/ControleVisualizar.php";
                                 <td><?= $livro['autor'] ?></td>
                                 <td><?= $livro['editora'] ?></td>
                                 <td class="text-bg-secondary text-center">
-                                    <a class="nav-link border-bottom border-light" href="visualizar_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>">
-                                        Visualizar
-                                    </a>
-                                    <a class="nav-link" href="pdf/livro_o-livro-dos-espiritos.pdf" target="_blank" title="<?= $livro['titulo'] ?>">
-                                        Baixar
-                                    </a>
+                                    <a class="nav-link border-bottom border-light" href="visualizar_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>">Visualizar</a>
+                                    
+                                    <a class="nav-link" href="pdf/livro_o-livro-dos-espiritos.pdf" target="_blank" title="<?= $livro['titulo'] ?>">Baixar</a>
                                 </td>
                             </tr>
                         </tbody>

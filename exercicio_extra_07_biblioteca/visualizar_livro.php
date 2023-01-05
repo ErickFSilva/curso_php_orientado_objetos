@@ -24,7 +24,7 @@ ob_start();
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-md-10 offset-md-1 mt-4">
+            <div class="col-sm-10 offset-sm-1 mt-4">
 
                 <?php
 
@@ -55,10 +55,10 @@ ob_start();
 
                 ?>
 
-                    <div class="card mb-3">
+                    <div class="card border-0">
                         <div class="row g-0">
 
-                            <div class="col-md-4">
+                            <div class="col-md-4 d-flex justify-content-center align-items-center">
                                 <a class="nav-link" href="pdf/livro_o-livro-dos-espiritos.pdf" target="_blank" title="<?= $titulo ?>">
                                     <img src="<?= $capa ?>" class="img-fluid rounded" alt="<?= $titulo ?>">
                                 </a>
@@ -66,7 +66,7 @@ ob_start();
 
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h1 class="card-title h5"><?= $titulo ?></h1>
+                                    <h1 class="card-title h4 my-3"><?= $titulo ?></h1>
                                     <p class="card-text"><?= $resumo ?></p>
                                     <p class="card-text">
                                         <small class="text-muted">Editora <?= $editora ?> / <?= $autor ?></small>
