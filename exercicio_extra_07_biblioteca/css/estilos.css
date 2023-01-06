@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+
+/* Botão Novo Livro */
+.btn-add-livro {
+    text-align: right;
+}
+
+.btn-add-livro a {
+    padding: 5px 10px;
+    display: inline-block;
+    border: 1px solid slategray;
+    border-radius: 50%;
+    text-decoration: none;
+    font: bold 22px Verdana;
+    color: #fff;
+    background-color: #2b5b81;
+}
+
+
+/* ESPECÍFICOS */
+.cod-livro-visualizar {
+    /* font-size: 16px; */
+    color: #aaaaaa;
+}
+
+.borda-baixo {
+    border-bottom: 1px dashed #ddd;
+}
+
+.bg-color-1 {
+    background-color: slateblue;
+}
+
+.bg-color-2 {
+    background-color: #4682b4;
+}
+
+.bg-color-3 {
+    background-color: #2b5b81;
+}
