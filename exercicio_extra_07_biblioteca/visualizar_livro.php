@@ -50,7 +50,7 @@ ob_start();
                     $visualizar_livro = new ControleVisualizar();
 
                     // Envia o 'cod' recuperado para o atributo 'cod_livro_Atual' da classe 'ControleVisualizar'
-                    $visualizar_livro->cod_livro_Atual = $cod;
+                    $visualizar_livro->__set('cod_livro_Atual', $cod);
 
                     // Instancia o método 'visualizarLivro'
                     $livro = $visualizar_livro->visualizarLivro();

@@ -24,13 +24,13 @@
 
                 <!-- Cadastro -->
                 <?php
-                if ($nome_pagina == 'cadastro') { ?>
+                if ($nome_pagina == 'livros') { ?>
                     <li class="navbar-item">
-                        <a class="nav-link active" aria-current="page" href="cadastro.php">Cadastro</a>
+                        <a class="nav-link active" aria-current="page" href="livros.php">Livros</a>
                     </li>
                 <?php } else { ?>
                     <li class="navbar-item">
-                        <a class="nav-link" href="cadastro.php">Cadastro</a>
+                        <a class="nav-link" href="livros.php">Livros</a>
                     </li>
                 <?php } ?>
 
