@@ -21,27 +21,30 @@ drop table biblioteca_autor;
 drop table biblioteca_espirito;
 drop table biblioteca_editora;
 
+delete from biblioteca_livro where cod_livro = 10003;
+
 
 -- TABELA: biblioteca_livro
 create table if not exists biblioteca_livro (
-	cod_livro int not null,
+	id int primary key auto_increment,
+	cod_livro varchar(5) not null,
     titulo varchar(64) not null,
-    cod_genero int not null,
-    cod_grupo int not null,
+    genero varchar(64) not null,
+    grupo varchar(64) not null,
     paginas varchar(4),
     resumo text,
-    capa text,
-    data_inclusao date not null,
-    cod_autor int not null,
-    cod_espirito int not null,
-    cod_editora int not null,
+    data_inclusao datetime not null,
+    autor varchar(64) not null,
+    espirito varchar(64) not null,
+    editora varchar(64) not null,
     quantidade varchar(3) not null,
-    constraint pk_livro primary key (cod_livro),
-    constraint fk_livro_genero foreign key (cod_genero) references biblioteca_genero (cod_genero),
-    constraint fk_livro_grupo foreign key (cod_grupo) references biblioteca_grupo (cod_grupo),
-    constraint fk_livro_autor foreign key (cod_autor) references biblioteca_autor (cod_autor),
-    constraint fk_livro_espirito foreign key (cod_espirito) references biblioteca_espirito (cod_espirito),
-    constraint fk_livro_editora foreign key (cod_editora) references biblioteca_editora (cod_editora)
+    capa text
+    -- constraint pk_livro primary key (id),
+    -- constraint fk_livro_genero foreign key (cod_genero) references biblioteca_genero (cod_genero),
+    -- constraint fk_livro_grupo foreign key (cod_grupo) references biblioteca_grupo (cod_grupo),
+    -- constraint fk_livro_autor foreign key (cod_autor) references biblioteca_autor (cod_autor),
+    -- constraint fk_livro_espirito foreign key (cod_espirito) references biblioteca_espirito (cod_espirito),
+    -- constraint fk_livro_editora foreign key (cod_editora) references biblioteca_editora (cod_editora)
 );
 
 
@@ -86,22 +89,23 @@ create table if not exists biblioteca_editora (
 
 
 -- INSERT:
-insert into biblioteca_livro value (10001, 'O Livro dos Espíritos', 101, 101, '529', 'PRINCÍPIOS DA DOUTRINA ESPÍRITA: SOBRE A IMORTALIDADE DA ALMA, A NATUREZA DOS ESPÍRITOS E SUAS COM OS HOMENS, AS LEIS MORAIS, A VIDA PRESENTE, A VIDA FUTURA E O PORVIR DA HUMANIDADE — SEGUNDO OS ENSINOS DADOS POR ESPÍRITOS SUPERIORES COM O CONCURSO DE DIVERSOS MÉDIUNS — RECEBIDOS E COORDENADOS.', 'imagens/capa_o-livro-dos-espiritos.jpg', now(), 101, 101, 101, '5');
-insert into biblioteca_livro value (10002, 'O Evangelho Segundo o Espiritismo', 101, 101, '417', 'A EXPLICAÇÃO DAS MÁXIMAS MORAIS DO CRISTO EM CONCORDÂNCIA COM O ESPIRITISMO E SUAS APLICAÇÕES ÀS DIVERSAS CIRCUNSTÂNCIAS DA VIDA.', 'imagens/capa_o-evangelho-segundo-o-espiritismo.jpg',now(), 101, 101, 101, '7');
+insert into biblioteca_livro (cod_livro, titulo, genero, grupo, paginas, resumo, data_inclusao, autor, espirito, editora, quantidade, capa) values ('10001', 'O Livro dos Espíritos', 'Espiritismo', 'Codificação Espírita', '529', 'PRINCÍPIOS DA DOUTRINA ESPÍRITA: SOBRE A IMORTALIDADE DA ALMA, A NATUREZA DOS ESPÍRITOS E SUAS COM OS HOMENS, AS LEIS MORAIS, A VIDA PRESENTE, A VIDA FUTURA E O PORVIR DA HUMANIDADE — SEGUNDO OS ENSINOS DADOS POR ESPÍRITOS SUPERIORES COM O CONCURSO DE DIVERSOS MÉDIUNS — RECEBIDOS E COORDENADOS.', now(), 'Allan Kardec', 'Obra pessoal', 'FEB', '5', 'imagens/capa_o-livro-dos-espiritos.jpg');
+
+insert into biblioteca_livro values (null, '10002', 'O evangelho segundo o espiritismo', 'Espiritismo', 'Codificação Espírita', '529', 'O evangelho segundo o espiritismo.', now(), 'Allan Kardec', 'Obra pessoal', 'FEB', '8', 'imagens/capa_o-evangelho-segundo-o-espiritismo.jpg');
 
 insert into biblioteca_genero values (101, 'Espiritismo');
-insert into biblioteca_genero values (102, 'Espiritualista');
+insert into biblioteca_genero value (102, 'Espiritualista');
 
-insert into biblioteca_grupo value (101, 'Codificação Espírita');
-insert into biblioteca_grupo value (102, 'Série André Luiz');
+insert into biblioteca_grupo values (101, 'Codificação Espírita');
+insert into biblioteca_grupo values (102, 'Série André Luiz');
 
-insert into biblioteca_autor value (101, 'Allan Kardec');
-insert into biblioteca_autor value (102, 'Chico Xavier');
+insert into biblioteca_autor values (101, 'Allan Kardec');
+insert into biblioteca_autor values (102, 'Chico Xavier');
 
-insert into biblioteca_espirito value (101, 'Obra pessoal');
-insert into biblioteca_espirito value (102, 'André Luiz');
+insert into biblioteca_espirito values (101, 'Obra pessoal');
+insert into biblioteca_espirito values (102, 'André Luiz');
 
-insert into biblioteca_editora value (101, 'FEB');
+insert into biblioteca_editora values (101, 'FEB');
 
 
 -- SELECT
@@ -123,25 +127,26 @@ select cod_espirito, espirito from biblioteca_espirito;
 select * from biblioteca_editora;
 select cod_editora, editora from biblioteca_editora;
 
-select bl.cod_livro, 
-       bl.titulo, 
-       bg.genero, 
-       bgp.grupo,
-       bl.paginas, 
-       bl.resumo,
-       bl.data_inclusao,
-       ba.autor,
-       besp.espirito,
-       be.editora,
-       bl.quantidade,
-       bl.capa
-from biblioteca_livro as bl
-inner join biblioteca_genero as bg on (bl.cod_genero = bg.cod_genero)
-inner join biblioteca_grupo as bgp on (bl.cod_grupo = bgp.cod_grupo)
-inner join biblioteca_autor as ba on (bl.cod_autor = ba.cod_autor)
-inner join biblioteca_espirito as besp on (bl.cod_autor = besp.cod_espirito)
-inner join biblioteca_editora as be on (bl.cod_editora = be.cod_editora)
-order by bgp.grupo;
+select id,
+	   cod_livro, 
+       titulo, 
+       genero, 
+       grupo,
+       paginas, 
+       resumo,
+       data_inclusao,
+       autor,
+       espirito,
+       editora,
+       quantidade,
+       capa
+from biblioteca_livro
+-- inner join biblioteca_genero as bg on (bl.cod_genero = bg.cod_genero)
+-- inner join biblioteca_grupo as bgp on (bl.cod_grupo = bgp.cod_grupo)
+-- inner join biblioteca_autor as ba on (bl.cod_autor = ba.cod_autor)
+-- inner join biblioteca_espirito as besp on (bl.cod_autor = besp.cod_espirito)
+-- inner join biblioteca_editora as be on (bl.cod_editora = be.cod_editora)
+order by grupo;
 
 
 -- UPDATE

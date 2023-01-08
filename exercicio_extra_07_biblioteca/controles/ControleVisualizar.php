@@ -23,27 +23,7 @@ class ControleVisualizar extends Conexao
     {
         $this->connect = $this->connectDb();
 
-        $sql_select = "
-            select bl.cod_livro, 
-                   bl.titulo, 
-                   bg.genero, 
-                   bgp.grupo,
-                   bl.paginas, 
-                   bl.resumo, 
-                   bl.data_inclusao,
-                   ba.autor, 
-                   besp.espirito,
-                   be.editora,
-                   bl.quantidade,
-                   bl.capa
-                   from biblioteca_livro as bl
-                   inner join biblioteca_genero as bg on (bl.cod_genero = bg.cod_genero)
-                   inner join biblioteca_grupo as bgp on (bl.cod_grupo = bgp.cod_grupo)
-                   inner join biblioteca_autor as ba on (bl.cod_autor = ba.cod_autor)
-                   inner join biblioteca_espirito as besp on (bl.cod_autor = besp.cod_espirito)
-                   inner join biblioteca_editora as be on (bl.cod_editora = be.cod_editora)
-                   order by bgp.grupo
-        ";
+        $sql_select = "select id, cod_livro, titulo, genero, grupo, paginas, resumo, data_inclusao, autor, espirito, editora, quantidade, capa from biblioteca_livro order by grupo, titulo";
 
         $query = $this->connect->prepare($sql_select);
         $query->execute();
@@ -56,27 +36,7 @@ class ControleVisualizar extends Conexao
     {
         $this->connect = $this->connectDb();
 
-        $sql_select = "
-            select bl.cod_livro, 
-                   bl.titulo, 
-                   bg.genero, 
-                   bgp.grupo,
-                   bl.paginas, 
-                   bl.resumo, 
-                   bl.data_inclusao,
-                   ba.autor, 
-                   besp.espirito,
-                   be.editora,
-                   bl.quantidade,
-                   bl.capa
-                   from biblioteca_livro as bl
-                   inner join biblioteca_genero as bg on (bl.cod_genero = bg.cod_genero)
-                   inner join biblioteca_grupo as bgp on (bl.cod_grupo = bgp.cod_grupo)
-                   inner join biblioteca_autor as ba on (bl.cod_autor = ba.cod_autor)
-                   inner join biblioteca_espirito as besp on (bl.cod_autor = besp.cod_espirito)
-                   inner join biblioteca_editora as be on (bl.cod_editora = be.cod_editora)
-                   where bl.cod_livro = :cod_livro limit 1
-        ";
+        $sql_select = "select id, cod_livro, titulo, genero, grupo, paginas, resumo, data_inclusao, autor, espirito, editora, quantidade, capa from biblioteca_livro where cod_livro = :cod_livro limit 1";
 
         $query = $this->connect->prepare($sql_select);
         $query->bindParam(':cod_livro', $this->cod_livro_Atual);
