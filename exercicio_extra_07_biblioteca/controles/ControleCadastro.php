@@ -9,6 +9,9 @@ class ControleCadastro extends Conexao
     // Métodos
     public function cadastraLivro(): bool
     {
+        // Imagem da capa que será adicionada no cadastro do livro
+        $capa = "imagens/{$this->formData['capa']}";
+
         $this->connect = $this->connectDb();
 
         $sql_insert = "insert into biblioteca_livro (cod_livro, titulo, genero, grupo, paginas, resumo, data_inclusao, autor, espirito, editora, quantidade, capa) values (:cod_livro, :titulo, :genero, :grupo, :paginas, :resumo, now(), :autor, :espirito, :editora, :quantidade, :capa)";
@@ -25,7 +28,7 @@ class ControleCadastro extends Conexao
         $query->bindParam(':espirito', $this->formData['espirito']);
         $query->bindParam(':editora', $this->formData['editora']);
         $query->bindParam(':quantidade', $this->formData['quantidade']);
-        $query->bindParam(':capa', $this->formData['capa']);
+        $query->bindParam(':capa', $capa);
 
         $query->execute();
 

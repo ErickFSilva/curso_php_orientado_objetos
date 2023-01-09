@@ -85,7 +85,7 @@ require "controles/ControleCadastro.php";
                                     <td><?= $autor ?></td>
                                     <td><?= $editora ?></td>
                                     <td><?= $grupo ?></td>
-                                    <td class="text-bg-secondary text-center">
+                                    <td class="text-bg-warning text-center">
                                         <a class="nav-link" href="visualizar_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>">Visualizar</a>
                                     </td>
                                 </tr>

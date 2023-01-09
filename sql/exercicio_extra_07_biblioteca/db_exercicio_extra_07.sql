@@ -38,7 +38,7 @@ create table if not exists biblioteca_livro (
     espirito varchar(64) not null,
     editora varchar(64) not null,
     quantidade varchar(3) not null,
-    capa text
+    capa varchar(256)
     -- constraint pk_livro primary key (id),
     -- constraint fk_livro_genero foreign key (cod_genero) references biblioteca_genero (cod_genero),
     -- constraint fk_livro_grupo foreign key (cod_grupo) references biblioteca_grupo (cod_grupo),
