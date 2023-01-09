@@ -21,7 +21,7 @@ drop table biblioteca_autor;
 drop table biblioteca_espirito;
 drop table biblioteca_editora;
 
-delete from biblioteca_livro where cod_livro = 10003;
+delete from biblioteca_livro where cod_livro = 10002;
 
 
 -- TABELA: biblioteca_livro

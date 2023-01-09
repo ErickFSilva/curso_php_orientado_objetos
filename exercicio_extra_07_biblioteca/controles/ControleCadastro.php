@@ -7,11 +7,11 @@ class ControleCadastro extends Conexao
     public array $formData;
 
     // Métodos
-    public function cadastraLivro()//: bool
+    public function cadastraLivro(): bool
     {
         $this->connect = $this->connectDb();
 
-        $sql_insert = "insert into biblioteca_livro values (null, :cod_livro, :titulo, :genero, :grupo, :paginas, :resumo, :data_inclusao, :autor, :espirito, :editora, :quantidade, :capa)";
+        $sql_insert = "insert into biblioteca_livro (cod_livro, titulo, genero, grupo, paginas, resumo, data_inclusao, autor, espirito, editora, quantidade, capa) values (:cod_livro, :titulo, :genero, :grupo, :paginas, :resumo, now(), :autor, :espirito, :editora, :quantidade, :capa)";
 
         $query = $this->connect->prepare($sql_insert);
 
@@ -21,22 +21,21 @@ class ControleCadastro extends Conexao
         $query->bindParam(':grupo', $this->formData['grupo']);
         $query->bindParam(':paginas', $this->formData['paginas']);
         $query->bindParam(':resumo', $this->formData['resumo']);
-        $query->bindParam(':data_inclusao', $this->formData['data_inclusao']);
         $query->bindParam(':autor', $this->formData['autor']);
         $query->bindParam(':espirito', $this->formData['espirito']);
         $query->bindParam(':editora', $this->formData['editora']);
         $query->bindParam(':quantidade', $this->formData['quantidade']);
-        $query->bindParam(':capa', "imagens/{$this->formData['capa']}");
+        $query->bindParam(':capa', $this->formData['capa']);
 
         $query->execute();
 
-        // if ($query->rowCount()) {
+        if ($query->rowCount()) {
 
-        //     return true;
-        // } 
-        // else {
+            return true;
+        } 
+        else {
 
-        //     return false;
-        // }
+            return false;
+        }
     }
 }
