@@ -4,8 +4,8 @@ session_start();
 ob_start();
 
 require "controles/Conexao.php";
-require "controles/ControleVisualizar.php";
-require "controles/ControleCadastro.php";
+require "controles/Visualizar.php";
+require "controles/Cadastro.php";
 
 ?>
 
@@ -32,7 +32,7 @@ require "controles/ControleCadastro.php";
     $nome_pagina = 'livros';
     require "navegacao.php";
 
-    $controle_visualizar = new ControleVisualizar();
+    $visualizar = new Visualizar();
     ?>
 
     <div class="container-fluid">
@@ -70,7 +70,7 @@ require "controles/ControleCadastro.php";
                                 unset($_SESSION['msg']);
                             }
 
-                            $livros = $controle_visualizar->listar();
+                            $livros = $visualizar->listar();
 
                             foreach ($livros as $livro) {
 
@@ -85,8 +85,12 @@ require "controles/ControleCadastro.php";
                                     <td><?= $autor ?></td>
                                     <td><?= $editora ?></td>
                                     <td><?= $grupo ?></td>
-                                    <td class="text-bg-warning text-center">
-                                        <a class="nav-link" href="visualizar_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>">Visualizar</a>
+                                    <td>
+                                        <div class="text-center">
+                                            <a class="nav-link mb-2 py-1 px-2 text-bg-success rounded-end rounded-5" href="visualizar_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>">Visualizar</a>
+
+                                            <a class="nav-link py-1 px-2 text-bg-danger rounded-end rounded-5" href="remover_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>">Remover</a>
+                                        </div>
                                     </td>
                                 </tr>
 
@@ -123,16 +127,16 @@ require "controles/ControleCadastro.php";
                     $data_atual = date("d/m/Y");
                     $data_atual_form = date("Y-m-d h:i:s");
 
-                    $novo_codigo = $controle_visualizar->listaNovoCodigoLivro();
+                    $novo_codigo = $visualizar->listaNovoCodigoLivro();
 
                     $form_data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
                     if (!empty($form_data['btn_cad_livro'])) {
 
-                        $controle_cadastro = new ControleCadastro();
-                        $controle_cadastro->formData = $form_data;
+                        $cadastro = new Cadastro();
+                        $cadastro->formData = $form_data;
 
-                        $retorno = $controle_cadastro->cadastraLivro();
+                        $retorno = $cadastro->cadastraLivro();
 
                         if ($retorno) {
 

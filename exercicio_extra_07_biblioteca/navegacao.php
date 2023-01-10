@@ -22,7 +22,7 @@
                     </li>
                 <?php } ?>
 
-                <!-- Cadastro -->
+                <!-- Livros -->
                 <?php
                 if ($nome_pagina == 'livros') { ?>
                     <li class="navbar-item">
@@ -31,6 +31,14 @@
                 <?php } else { ?>
                     <li class="navbar-item">
                         <a class="nav-link" href="livros.php">Livros</a>
+                    </li>
+                <?php } ?>
+
+                <!-- Visualizar Livros -->
+                <?php
+                if ($nome_pagina == 'visualizar_livros') { ?>
+                    <li class="navbar-item">
+                        <a class="nav-link text-warning fs-6" aria-current="page" href="livros.php">Voltar</a>
                     </li>
                 <?php } ?>
 

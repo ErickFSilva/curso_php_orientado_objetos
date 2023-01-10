@@ -1,6 +1,6 @@
 <?php
 
-class ControleVisualizar extends Conexao
+class Visualizar extends Conexao
 {
     // Atributos
     private object $connect;

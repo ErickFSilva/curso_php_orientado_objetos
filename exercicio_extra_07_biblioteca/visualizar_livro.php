@@ -25,7 +25,7 @@ ob_start();
 <body>
 
     <?php
-    $nome_pagina = 'visualizar';
+    $nome_pagina = 'visualizar_livros';
     require "navegacao.php";
     ?>
 
@@ -44,10 +44,10 @@ ob_start();
 
                     // Incorpora as classes no arquivo
                     require "controles/Conexao.php";
-                    require "controles/ControleVisualizar.php";
+                    require "controles/Visualizar.php";
 
                     // Instancia a classe e instancia o objeto
-                    $visualizar_livro = new ControleVisualizar();
+                    $visualizar_livro = new Visualizar();
 
                     // Envia o 'cod' recuperado para o atributo 'cod_livro_Atual' da classe 'ControleVisualizar'
                     $visualizar_livro->__set('cod_livro_Atual', $cod);
@@ -67,11 +67,7 @@ ob_start();
                         <div class="row g-0">
 
                             <div class="col-md-4 d-flex justify-content-center align-items-center">
-                                <a class="nav-link" href="pdf/livro_o-livro-dos-espiritos.pdf" target="_blank" title="<?= $titulo ?>">
-                                    <img src="<?= $capa ?>" class="img-fluid rounded" alt="<?= $titulo ?>">
-                                    <!-- <small class="text-muted text-center d-block">Click na imagem para baixar</small> -->
-                                </a>
-
+                                <img src="<?= $capa ?>" class="img-fluid rounded" alt="<?= $titulo ?>">
                             </div>
 
                             <div class="col-md-8">

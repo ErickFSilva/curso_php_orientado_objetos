@@ -1,6 +1,6 @@
 <?php
 
-class ControleCadastro extends Conexao
+class Cadastro extends Conexao
 {
     // Atributos
     private object $connect;
@@ -10,8 +10,16 @@ class ControleCadastro extends Conexao
     public function cadastraLivro(): bool
     {
         // Imagem da capa que será adicionada no cadastro do livro
-        $capa = "imagens/{$this->formData['capa']}";
+        $capa = null;
 
+        if(empty($this->formData['capa'])) {
+            $capa = 'imagens/modelo_livro.jpg';
+        }
+        else {
+            $capa = "imagens/{$this->formData['capa']}";
+        }
+
+        // Estabelece a conexão
         $this->connect = $this->connectDb();
 
         $sql_insert = "insert into biblioteca_livro (cod_livro, titulo, genero, grupo, paginas, resumo, data_inclusao, autor, espirito, editora, quantidade, capa) values (:cod_livro, :titulo, :genero, :grupo, :paginas, :resumo, now(), :autor, :espirito, :editora, :quantidade, :capa)";

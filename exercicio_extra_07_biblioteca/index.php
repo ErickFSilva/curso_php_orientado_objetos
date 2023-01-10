@@ -4,7 +4,7 @@ session_start();
 ob_start();
 
 require "controles/Conexao.php";
-require "controles/ControleVisualizar.php";
+require "controles/Visualizar.php";
 
 ?>
 
