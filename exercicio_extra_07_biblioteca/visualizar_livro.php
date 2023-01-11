@@ -79,6 +79,7 @@ ob_start();
                                     <p class="card-text"><span class="fw-bold">Páginas: </span><?= $paginas ?></p>
                                     <p class="card-text"><span class="fw-bold">Resumo: </span><?= $resumo ?></p>
                                     <p class="card-text"><span class="fw-bold">Autor: </span><?= $autor ?></p>
+                                    <p class="card-text"><span class="fw-bold">Espírito: </span><?= $espirito ?></p>
                                     <p class="card-text"><span class="fw-bold">Editora: </span><?= $editora ?></p>
                                     <p class="card-text"><span class="fw-bold">Inclusão: </span><?= $data_inclusao ?></p>
                                     <p class="card-text"><span class="fw-bold">Quantidade: </span><?= $quantidade ?></p>

@@ -34,6 +34,7 @@ create table if not exists biblioteca_livro (
     paginas varchar(4),
     resumo text,
     data_inclusao datetime not null,
+    data_update datetime,
     autor varchar(64) not null,
     espirito varchar(64) not null,
     editora varchar(64) not null,
@@ -150,4 +151,17 @@ order by grupo;
 
 
 -- UPDATE
-
+update biblioteca_livro
+set cod_livro = '10003',
+    titulo = 'O Evangelho Segundo o Espiritismo',
+    genero = 'Espiritismo',
+    grupo = 'Codificação Espírita',
+    paginas = '417',
+    resumo = 'O Evangelho Segundo o Espiritismo',
+    autor = 'Allan Kardec',
+    espirito = 'Obra pessoal',
+    editora = 'FEB',
+    data_update = now(),
+    quantidade = '1',
+    capa = 'imagens/capa_o-evangelho-segundo-o-espiritismo.jpg'
+where cod_livro = '10003';

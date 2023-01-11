@@ -22,6 +22,9 @@ require "controles/Cadastro.php";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/e1b86b0aaa.js" crossorigin="anonymous"></script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="css/estilos.css">
 </head>
@@ -87,9 +90,11 @@ require "controles/Cadastro.php";
                                     <td><?= $grupo ?></td>
                                     <td>
                                         <div class="text-center">
-                                            <a class="nav-link mb-2 py-1 px-2 text-bg-success rounded-end rounded-5" href="visualizar_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>">Visualizar</a>
+                                            <a class="nav-link mb-2 py-1 px-2 text-bg-success rounded-end rounded-5 d-inline-block" href="visualizar_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>"><i class="fa-regular fa-eye"></i></a>
 
-                                            <a class="nav-link py-1 px-2 text-bg-danger rounded-end rounded-5" href="remover_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>">Remover</a>
+                                            <a class="nav-link mb-2 py-1 px-2 text-bg-warning rounded-1 d-inline-block" href="editar_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>"><i class="fa-regular fa-pen-to-square"></i></a>
+
+                                            <a class="nav-link py-1 px-2 text-bg-danger rounded-start rounded-5 d-inline-block" href="remover_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>"><i class="fa-regular fa-trash-can"></i></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -105,9 +110,7 @@ require "controles/Cadastro.php";
         </div>
     </div>
 
-
-
-    <!-- Modal -->
+    <!-- ModalAddLivro -->
     <div class="modal fade" id="ModalAddLivro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
         <div class="modal-dialog modal-lg modal-fullscreen-lg-down">
