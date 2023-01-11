@@ -136,6 +136,7 @@ select id,
        paginas, 
        resumo,
        data_inclusao,
+       data_update,
        autor,
        espirito,
        editora,
@@ -152,7 +153,7 @@ order by grupo;
 
 -- UPDATE
 update biblioteca_livro
-set cod_livro = '10003',
+set cod_livro = '10001',
     titulo = 'O Evangelho Segundo o Espiritismo',
     genero = 'Espiritismo',
     grupo = 'Codificação Espírita',
@@ -164,4 +165,4 @@ set cod_livro = '10003',
     data_update = now(),
     quantidade = '1',
     capa = 'imagens/capa_o-evangelho-segundo-o-espiritismo.jpg'
-where cod_livro = '10003';
+where cod_livro = '10001';

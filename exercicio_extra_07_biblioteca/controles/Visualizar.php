@@ -36,7 +36,7 @@ class Visualizar extends Conexao
     {
         $this->connect = $this->connectDb();
 
-        $sql_select = "select id, cod_livro, titulo, genero, grupo, paginas, resumo, data_inclusao, autor, espirito, editora, quantidade, capa from biblioteca_livro where cod_livro = :cod_livro limit 1";
+        $sql_select = "select id, cod_livro, titulo, genero, grupo, paginas, resumo, data_inclusao, data_update, autor, espirito, editora, quantidade, capa from biblioteca_livro where cod_livro = :cod_livro limit 1";
 
         $query = $this->connect->prepare($sql_select);
         $query->bindParam(':cod_livro', $this->cod_livro_Atual);

@@ -82,6 +82,7 @@ ob_start();
                                     <p class="card-text"><span class="fw-bold">Espírito: </span><?= $espirito ?></p>
                                     <p class="card-text"><span class="fw-bold">Editora: </span><?= $editora ?></p>
                                     <p class="card-text"><span class="fw-bold">Inclusão: </span><?= $data_inclusao ?></p>
+                                    <p class="card-text"><span class="fw-bold">Editado: </span><?= $data_update ?></p>
                                     <p class="card-text"><span class="fw-bold">Quantidade: </span><?= $quantidade ?></p>
                                 </div>
                             </div>

@@ -38,13 +38,27 @@ ob_start();
                 <?php
 
                 // Incorpora as classes no arquivo
-                // require "controles/Conexao.php";
-                // require "controles/Editar.php";
+                require "controles/Conexao.php";
+                require "controles/Editar.php";
 
                 $form_edit = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-                // $editar = new Editar();
-                // $editar->__set('form_edit', $form_edit);
+                $editar = new Editar();
+                $editar->__set('form_edit', $form_edit);
+                $retorno = $editar->editar();
+
+                if($retorno) {
+
+                    $_SESSION['msg'] = '<p class="text-success">Livro atualizado com sucesso!</p>';
+                    header('Location: livros.php');
+
+                }
+                else {
+
+                    $_SESSION['msg'] = '<p class="text-success">Erro na atualização!</p>';
+                    header('Location: livros.php');
+
+                }
 
                 ?>
 
