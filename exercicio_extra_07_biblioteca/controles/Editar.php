@@ -20,6 +20,16 @@ class Editar extends Conexao
     // Métodos
     public function editar(): bool
     {
+        // Imagem da capa que será adicionada no cadastro do livro
+        $capa = null;
+
+        if(empty($this->form_edit['capa'])) {
+            $capa = 'imagens/modelo_livro.jpg';
+        }
+        else {
+            $capa = "imagens/{$this->form_edit['capa']}";
+        }
+
         $this->connect = $this->connectDb();
 
         $sql_update = "update biblioteca_livro set cod_livro = :cod_livro, titulo = :titulo, genero = :genero, grupo = :grupo, paginas = :paginas, resumo = :resumo, autor = :autor, espirito = :espirito, editora = :editora, data_update = now(), quantidade = :quantidade, capa = :capa where cod_livro = :cod_livro";
@@ -36,7 +46,7 @@ class Editar extends Conexao
         $query->bindParam(':espirito', $this->form_edit['espirito']);
         $query->bindParam(':editora', $this->form_edit['editora']);
         $query->bindParam(':quantidade', $this->form_edit['quantidade']);
-        $query->bindParam(':capa', $this->form_edit['capa']);
+        $query->bindParam(':capa', $capa);
 
         $query->execute();
 
