@@ -90,11 +90,17 @@ require "controles/Cadastro.php";
                                     <td><?= $grupo ?></td>
                                     <td>
                                         <div class="text-center">
-                                            <a class="nav-link mb-2 py-1 px-2 text-bg-success rounded-end rounded-5 d-inline-block" href="visualizar_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>"><i class="fa-regular fa-eye"></i></a>
+                                            <a class="nav-link mb-2 py-1 px-2 text-bg-success rounded d-inline-block" href="visualizar_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </a>
 
-                                            <a class="nav-link mb-2 py-1 px-2 text-bg-warning rounded-1 d-inline-block" href="editar_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            <a class="nav-link mb-2 py-1 px-2 text-bg-warning rounded d-inline-block" href="editar_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>">
+                                                <i class="fa-regular fa-pen-to-square"></i>
+                                            </a>
 
-                                            <a class="nav-link py-1 px-2 text-bg-danger rounded-start rounded-5 d-inline-block" href="remover_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>"><i class="fa-regular fa-trash-can"></i></i></a>
+                                            <a class="nav-link py-1 px-2 text-bg-danger rounded d-inline-block" href="remover_livro.php?cod=<?= $livro['cod_livro'] ?>" title="<?= $livro['titulo'] ?>">
+                                                <i class="fa-regular fa-trash-can"></i>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>

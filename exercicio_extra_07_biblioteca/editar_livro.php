@@ -3,6 +3,9 @@
 session_start();
 ob_start();
 
+// Incorpora as classes no arquivo
+require "controles/Conexao.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -38,26 +41,26 @@ ob_start();
                 <?php
 
                 // Incorpora as classes no arquivo
-                require "controles/Conexao.php";
                 require "controles/Editar.php";
 
                 $form_edit = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-                $editar = new Editar();
-                $editar->__set('form_edit', $form_edit);
-                $retorno = $editar->editar();
+                if (!empty($form_edit['btn_edit_livro'])) {
 
-                if($retorno) {
+                    $editar = new Editar();
+                    $editar->__set('form_edit', $form_edit);
 
-                    $_SESSION['msg'] = '<p class="text-success">Livro atualizado com sucesso!</p>';
-                    header('Location: livros.php');
+                    $retorno = $editar->editar();
 
-                }
-                else {
+                    if ($retorno) {
 
-                    $_SESSION['msg'] = '<p class="text-success">Erro na atualização!</p>';
-                    header('Location: livros.php');
+                        $_SESSION['msg'] = '<p class="text-success">Livro atualizado com sucesso!</p>';
+                        header('Location: livros.php');
+                    } else {
 
+                        $_SESSION['msg'] = '<p class="text-success">Erro na atualização!</p>';
+                        header('Location: livros.php');
+                    }
                 }
 
                 ?>
@@ -72,7 +75,6 @@ ob_start();
                 if (!empty($cod)) {
 
                     // Incorpora as classes no arquivo
-                    require "controles/Conexao.php";
                     require "controles/Visualizar.php";
 
                     // Instancia a classe e instancia o objeto
@@ -119,7 +121,7 @@ ob_start();
                                         <p class="card-text">
                                             <span class="fw-bold">Gênero: </span>
                                             <select name="genero" class="form-select">
-                                                <option value=""></option>
+                                                <option value="<?= $genero ?>" selected><?= $genero ?></option>
                                                 <option value="Espiritismo">Espiritismo</option>
                                                 <option value="Bíblia">Bíblia</option>
                                                 <option value="Espiritualista">Espiritualista</option>
@@ -130,7 +132,7 @@ ob_start();
                                         <p class="card-text">
                                             <span class="fw-bold">Grupo: </span>
                                             <select name="grupo" class="form-select">
-                                                <option value=""></option>
+                                                <option value="<?= $grupo ?>" selected><?= $grupo ?></option>
                                                 <option value="Codificação Espírita">Codificação Espírita</option>
                                                 <option value="Série André Luiz">Livros André Luiz</option>
                                                 <option value="Série André Luiz">Livros Emanuel</option>
@@ -151,7 +153,7 @@ ob_start();
                                         <p class="card-text">
                                             <span class="fw-bold">Autor: </span>
                                             <select name="autor" class="form-select">
-                                                <option value=""></option>
+                                                <option value="<?= $autor ?>" selected><?= $autor ?></option>
                                                 <option value="Allan Kardec">Allan Kardec</option>
                                                 <option value="Chico Xavier">Chico Xavier</option>
                                                 <option value="Outro">Outro</option>
@@ -160,7 +162,7 @@ ob_start();
                                         <p class="card-text">
                                             <span class="fw-bold">Espírito: </span>
                                             <select name="espirito" class="form-select" required>
-                                                <option value=""></option>
+                                                <option value="<?= $espirito ?>" selected><?= $espirito ?></option>
                                                 <option value="Obra pessoal">Obra pessoal</option>
                                                 <option value="André Luiz">André Luiz</option>
                                                 <option value="Outro">Outro</option>
@@ -170,7 +172,7 @@ ob_start();
                                         <p class="card-text">
                                             <span class="fw-bold">Editora: </span>
                                             <select name="editora" class="form-select">
-                                                <option value=""></option>
+                                                <option value="<?= $editora ?>" selected><?= $editora ?></option>
                                                 <option value="FEB">FEB</option>
                                                 <option value="EME">EME</option>
                                                 <option value="Outro">Outro</option>

@@ -66,7 +66,7 @@ ob_start();
                     <div class="card border-0">
                         <div class="row g-0">
 
-                            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                            <div class="col-md-4 d-flex justify-content-center align-items-start">
                                 <img src="<?= $capa ?>" class="img-fluid rounded" alt="<?= $titulo ?>">
                             </div>
 
